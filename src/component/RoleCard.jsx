@@ -1,5 +1,5 @@
 import React from "react";
-
+import { roles } from "../constans";
 import styled from "@emotion/styled";
 import routes from "../Router/routes";
 import { useNavigate } from "react-router-dom";
@@ -20,9 +20,19 @@ const Card = styled("div")(({ theme }) => ({
 
 const RoleCard = ({ role }) => {
   const navigate = useNavigate();
+  // const history = useHistory();
 
   const handleClick = () => {
-    navigate(routes.LoginPage);
+    // navigate(routes.LoginPage, {
+    //   state: {
+    //     roleName: role,
+    //     roleId: roles.find((rl) => rl.name === role).id,
+    //   },
+    // });
+
+    if (role === roles[0].name) {
+      navigate(routes.ReceptionistDashboard);
+    }
   };
 
   return (
