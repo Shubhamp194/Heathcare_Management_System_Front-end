@@ -1,23 +1,45 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import routes from "../Router/routes";
 
-const NavBar = () => {
+const NavBar = ({ showBackButton = false }) => {
+  const navigate = useNavigate();
+
+  let buttonStyle = {
+    margin: "0px",
+    padding: "15px",
+    display: "flex",
+    justifyContent: showBackButton ? "space-between" : "end",
+  };
+
   return (
     <nav
       className="navbar"
       style={{
         backgroundColor: "white",
-        display: "flex",
-        justifyContent: "end",
       }}
     >
-      <ul
-        style={{
-          margin: "0px",
-          padding: "15px",
-        }}
-      >
+      <ul style={buttonStyle}>
+        {showBackButton && (
+          <div
+            style={{
+              display: "inline",
+              color: "black",
+              fontWeight: "bold",
+              fontSize: "1.25rem",
+              textDecoration: "none",
+              backgroundColor: "gray",
+              padding: "5px",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+            onClick={(e) => {
+              navigate(-1);
+            }}
+          >
+            back
+          </div>
+        )}
         <Link
           to={routes.LandingPage}
           className="nav-item"

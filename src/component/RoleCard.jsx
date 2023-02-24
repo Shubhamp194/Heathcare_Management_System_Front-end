@@ -31,7 +31,9 @@ const RoleCard = ({ role }) => {
     // });
 
     if (role === roles[0].name) {
-      navigate(routes.ReceptionistDashboard);
+      navigate(routes.ReceptionistDashboard, { replace: true });
+    } else if (role === roles[1].name) {
+      navigate(routes.DoctorDashboard, { replace: true });
     }
   };
 

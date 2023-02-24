@@ -4,15 +4,30 @@ import { getTodaysDateInYYYYMMDDFormatSeperateByhyphen as today } from "../utils
 
 const ReceptionistDashboard = () => {
   const [patientName, setPatientName] = useState("");
-  const [healthID, sethealthID] = useState("");
+  const [healthID, setHealthID] = useState("");
   const [timeStamp, setTimeStamp] = useState();
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [contactNo, setContactNo] = useState("");
+  const [doctor, setDoctor] = useState(-1);
+
+  const handleDoctorChange = (e) => {
+    // alert(e.target.value);
+    setDoctor(e.target.value);
+  };
 
   useEffect(() => {
     setTimeStamp(today());
   }, []);
+
+  const clearTheForm = () => {
+    setPatientName("");
+    setHealthID("");
+    setAddress("");
+    setPincode("");
+    setContactNo("");
+    setDoctor("");
+  };
 
   const handleContactNoChange = (e) => {
     setContactNo(e.target.value);
@@ -26,12 +41,24 @@ const ReceptionistDashboard = () => {
   };
 
   const handleHealthIDChange = (e) => {
-    sethealthID(e.target.value);
+    setHealthID(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("form submitted");
+    let errors = [];
+
+    let obj = {};
+    obj["name"] = patientName;
+    obj["uhaid"] = healthID;
+    obj["address"] = address;
+    obj["pincode"] = pincode;
+    obj["contactNo"] = contactNo;
+    obj["doctorId"] = doctor;
+
+    const healthRecord = JSON.stringify(obj);
+    console.log(healthRecord);
+    clearTheForm();
   };
 
   const handlePinCodeChange = (e) => {
@@ -40,7 +67,7 @@ const ReceptionistDashboard = () => {
 
   return (
     <div className="reception">
-      <NavBar />
+      <NavBar showBackButton={false} />
       <h1 style={{ textAlign: "center" }}>Reception Dashboard</h1>
       <p style={{ textAlign: "center" }}>Creat a new case</p>
 
@@ -56,7 +83,7 @@ const ReceptionistDashboard = () => {
         <form
           style={{
             backgroundColor: "white",
-            borderRadius: "15px",
+            borderRadius: "10px",
             width: "50vw",
             minHeight: "60vh",
             padding: "20px",
@@ -149,25 +176,8 @@ const ReceptionistDashboard = () => {
               }}
               onChange={handleAddressChange}
               value={address}
-            />
-
-            {/* <label htmlFor="address" style={{ fontSize: "20px" }}>
-              Address :{" "}
-            </label>
-            <input
-              type="text"
-              name="address"
-              placeholder="Enter Patients Address"
-              style={{
-                fontSize: "16px",
-                padding: "15px",
-                border: "1px grey solid",
-                borderRadius: "9px",
-              }}
-              onChange={handleAddressChange}
-              value={address}
               required
-            /> */}
+            />
           </div>
           {/* pincode */}
           <div className="form-group">
@@ -206,7 +216,7 @@ const ReceptionistDashboard = () => {
                 border: "1px grey solid",
                 borderRadius: "9px",
               }}
-              placeholder="only 10 last digits"
+              placeholder="Only 10 last digits"
               minLength={10}
               maxLength={10}
               onChange={handleContactNoChange}
@@ -218,15 +228,41 @@ const ReceptionistDashboard = () => {
               </label>
               <select
                 name="doctorlist"
+                id="doctorlist"
                 style={{ width: "150px", padding: "10px", borderRadius: "9px" }}
-                defaultValue={"Select Doctor"}
                 placeholder="blah"
+                value={doctor}
+                onChange={handleDoctorChange}
+                required
               >
                 <option>Select Doctor</option>
-                <option>Doctor 2</option>
-                <option>Doctor 1</option>
+                <option value={0}>Doctor 1</option>
+                <option value={1}>Doctor 2</option>
               </select>
             </div>
+          </div>
+          <div
+            style={{
+              textAlign: "center",
+            }}
+          >
+            <button
+              style={{
+                marginTop: "75px",
+                width: "150px",
+                height: "50px",
+                backgroundColor: "rgb(183,223,255)",
+                borderRadius: "15px",
+                border: "none",
+                cursor: "pointer",
+                boxShadow: "1px 1px 1px 1px rgba(0,0,155,0.5)",
+                fontSize: "1rem",
+                zIndex: "1",
+              }}
+              type={"submit"}
+            >
+              Create Record
+            </button>
           </div>
         </form>
       </div>

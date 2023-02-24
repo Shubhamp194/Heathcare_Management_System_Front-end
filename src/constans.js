@@ -4,4 +4,6 @@ const roles = [
   { id: 2, name: "Supervisor" },
 ];
 
+// const alphNumRegEsx = new RegExp("^w+$");
+
 export { roles };

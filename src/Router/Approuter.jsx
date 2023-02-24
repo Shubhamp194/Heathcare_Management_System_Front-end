@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LandingPage from "../pages/Landingpage";
 import LoginPage from "../pages/LoginPage";
 import ReceptionistDashboard from "../pages/ReceptionistDashboard";
+import DoctorDashboard from "../pages/DoctorsDashboard";
+import NewCasesDashboard from "../pages/NewCasesDashboard";
 
 const AppRouter = () => {
   return (
@@ -16,6 +18,8 @@ const AppRouter = () => {
           path={routes.ReceptionistDashboard}
           element={<ReceptionistDashboard />}
         />
+        <Route path={routes.DoctorDashboard} element={<DoctorDashboard />} />
+        <Route path={routes.OPD} element={<NewCasesDashboard />} />
         <Route path="*" element={<LandingPage />} />
       </Routes>
     </Router>
