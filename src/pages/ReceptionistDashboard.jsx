@@ -9,7 +9,7 @@ const ReceptionistDashboard = () => {
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [contactNo, setContactNo] = useState("");
-  const [doctor, setDoctor] = useState(-1);
+  const [doctor, setDoctor] = useState("");
 
   const handleDoctorChange = (e) => {
     // alert(e.target.value);
@@ -46,19 +46,46 @@ const ReceptionistDashboard = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let errors = [];
 
     let obj = {};
-    obj["name"] = patientName;
-    obj["uhaid"] = healthID;
-    obj["address"] = address;
-    obj["pincode"] = pincode;
-    obj["contactNo"] = contactNo;
-    obj["doctorId"] = doctor;
+    obj["currentStreet1"] = "IIITB";
+    obj["citizen"] = { id: healthID };
+    obj["currentCity"] = "Bangalore";
+    obj["currentState"] = "Karnataka";
+    obj["currentPincode"] = pincode;
+    obj["doctor"] = { loginId: doctor };
+    /* {
 
+      currentStreet1 : "",
+      currentStreet2 : "",
+      currentCity : "",
+      currentState : "",
+      currentPincode : "",
+      doctor:{loginId:""},
+      citizen:{"id":"" only numbers}
+      receptionist : {"loginId":""}
+
+    } */
     const healthRecord = JSON.stringify(obj);
-    console.log(healthRecord);
-    clearTheForm();
+    fetch("http://172.16.133.196:8081/receptionist/createHealthRecord", {
+      body: healthRecord,
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+    })
+      .then((res) => {
+        if (res.status === 200) return res.json();
+
+        throw new Error(res);
+      })
+      .then((data) => {
+        alert(data);
+        clearTheForm();
+        // console.log(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+      .finally(() => {});
   };
 
   const handlePinCodeChange = (e) => {
@@ -245,8 +272,8 @@ const ReceptionistDashboard = () => {
               required
             >
               <option>Select Doctor</option>
-              <option value={0}>Doctor 1</option>
-              <option value={1}>Doctor 2</option>
+              <option value={"DOC1"}>Doctor 1</option>
+              <option value={"DOC2"}>Doctor 2</option>
             </select>
           </div>
           <div
