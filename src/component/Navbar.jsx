@@ -17,6 +17,9 @@ const NavBar = ({ showBackButton = false }) => {
       className="navbar"
       style={{
         backgroundColor: "white",
+        position: "sticky",
+        top: "0px",
+        left: "0px",
       }}
     >
       <ul style={buttonStyle}>
@@ -34,16 +37,15 @@ const NavBar = ({ showBackButton = false }) => {
               cursor: "pointer",
             }}
             onClick={(e) => {
-              navigate(-1);
+              if (navigate.length > 1) navigate(-1);
             }}
           >
             back
           </div>
         )}
-        <Link
-          to={routes.LandingPage}
-          className="nav-item"
+        <div
           style={{
+            display: "inline",
             color: "black",
             fontWeight: "bold",
             fontSize: "1.25rem",
@@ -51,10 +53,14 @@ const NavBar = ({ showBackButton = false }) => {
             backgroundColor: "gray",
             padding: "5px",
             borderRadius: "5px",
+            cursor: "pointer",
+          }}
+          onClick={(e) => {
+            navigate(routes.LandingPage, { replace: true });
           }}
         >
           Logout
-        </Link>
+        </div>
       </ul>
     </nav>
   );

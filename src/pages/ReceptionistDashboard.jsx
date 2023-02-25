@@ -69,7 +69,9 @@ const ReceptionistDashboard = () => {
     <div className="reception">
       <NavBar showBackButton={false} />
       <h1 style={{ textAlign: "center" }}>Reception Dashboard</h1>
-      <p style={{ textAlign: "center" }}>Creat a new case</p>
+      <p style={{ textAlign: "center", fontSize: "1.5rem" }}>
+        Creat a new case
+      </p>
 
       <div
         className="case-form"
@@ -84,9 +86,10 @@ const ReceptionistDashboard = () => {
           style={{
             backgroundColor: "white",
             borderRadius: "10px",
-            width: "50vw",
+            width: "75vw",
             minHeight: "60vh",
             padding: "20px",
+            marginBottom: "10vh",
           }}
           onSubmit={handleSubmit}
         >
@@ -102,6 +105,7 @@ const ReceptionistDashboard = () => {
                 fontSize: "16px",
                 padding: "5px",
                 border: "1px grey solid",
+                flex: "1",
                 borderRadius: "9px",
               }}
               onChange={handleNameChange}
@@ -111,9 +115,15 @@ const ReceptionistDashboard = () => {
 
             <label
               htmlFor="timestamp"
-              style={{ fontSize: "20px", marginLeft: "50px" }}
+              style={{
+                fontSize: "20px",
+                marginLeft: "50px",
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "flex-end",
+              }}
             >
-              Date :{" "}
+              Date :&nbsp;&nbsp;
             </label>
             <input
               type="date"
@@ -123,6 +133,7 @@ const ReceptionistDashboard = () => {
                 padding: "5px",
                 border: "1px grey solid",
                 borderRadius: "9px",
+                maxWidth: "12%",
               }}
               value={timeStamp}
               // onChange={(e) => setTimeStamp(e.target.value)}
@@ -155,12 +166,9 @@ const ReceptionistDashboard = () => {
 
           {/* Patients address */}
 
-          <div
-            className="form-item"
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <div className="form-item" style={{}}>
             <label htmlFor="address" style={{ fontSize: "20px" }}>
-              Address :&nbsp;
+              Address :
             </label>
             <textarea
               placeholder="Enter Address"
@@ -180,7 +188,7 @@ const ReceptionistDashboard = () => {
             />
           </div>
           {/* pincode */}
-          <div className="form-group">
+          <div className="form-item">
             <label htmlFor="pincode" style={{ fontSize: "20px" }}>
               Pincode :{" "}
             </label>
@@ -202,7 +210,7 @@ const ReceptionistDashboard = () => {
           </div>
 
           {/* contact No */}
-          <div className="form-group">
+          <div className="form-item">
             <label htmlFor="contactno" style={{ fontSize: "20px" }}>
               Contact No. :{" "}
             </label>
@@ -222,24 +230,24 @@ const ReceptionistDashboard = () => {
               onChange={handleContactNoChange}
               required
             />
-            <div>
-              <label htmlFor="doctorList" style={{ fontSize: "20px" }}>
-                Doctor List :{" "}
-              </label>
-              <select
-                name="doctorlist"
-                id="doctorlist"
-                style={{ width: "150px", padding: "10px", borderRadius: "9px" }}
-                placeholder="blah"
-                value={doctor}
-                onChange={handleDoctorChange}
-                required
-              >
-                <option>Select Doctor</option>
-                <option value={0}>Doctor 1</option>
-                <option value={1}>Doctor 2</option>
-              </select>
-            </div>
+          </div>
+          <div className="form-item">
+            <label htmlFor="doctorList" style={{ fontSize: "20px" }}>
+              Doctor List :{" "}
+            </label>
+            <select
+              name="doctorlist"
+              id="doctorlist"
+              style={{ width: "15vw", padding: "10px", borderRadius: "9px" }}
+              placeholder="blah"
+              value={doctor}
+              onChange={handleDoctorChange}
+              required
+            >
+              <option>Select Doctor</option>
+              <option value={0}>Doctor 1</option>
+              <option value={1}>Doctor 2</option>
+            </select>
           </div>
           <div
             style={{
@@ -248,7 +256,7 @@ const ReceptionistDashboard = () => {
           >
             <button
               style={{
-                marginTop: "75px",
+                marginTop: "35px",
                 width: "150px",
                 height: "50px",
                 backgroundColor: "rgb(183,223,255)",
@@ -257,6 +265,7 @@ const ReceptionistDashboard = () => {
                 cursor: "pointer",
                 boxShadow: "1px 1px 1px 1px rgba(0,0,155,0.5)",
                 fontSize: "1rem",
+                fontWeight: "bold",
                 zIndex: "1",
               }}
               type={"submit"}

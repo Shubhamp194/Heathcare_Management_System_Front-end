@@ -30,6 +30,7 @@ const RoleCard = ({ role }) => {
     //   },
     // });
 
+    // without authenticaction
     if (role === roles[0].name) {
       navigate(routes.ReceptionistDashboard, { replace: true });
     } else if (role === roles[1].name) {

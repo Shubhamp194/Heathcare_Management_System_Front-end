@@ -7,6 +7,7 @@ import LoginPage from "../pages/LoginPage";
 import ReceptionistDashboard from "../pages/ReceptionistDashboard";
 import DoctorDashboard from "../pages/DoctorsDashboard";
 import NewCasesDashboard from "../pages/NewCasesDashboard";
+import PatientHealthRecordForm from "../pages/PatientHealthRecordForm";
 
 const AppRouter = () => {
   return (
@@ -20,6 +21,10 @@ const AppRouter = () => {
         />
         <Route path={routes.DoctorDashboard} element={<DoctorDashboard />} />
         <Route path={routes.OPD} element={<NewCasesDashboard />} />
+        <Route
+          path={routes.HealthRecord}
+          element={<PatientHealthRecordForm />}
+        />
         <Route path="*" element={<LandingPage />} />
       </Routes>
     </Router>

@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import NavBar from "../component/Navbar";
 
 const LoginForm = styled("form")(({ theme }) => ({
   backgroundColor: "#FAFAFA",
@@ -53,6 +54,7 @@ const LoginPage = () => {
 
   return (
     <Container>
+      {/* <NavBar showBackButton={true} /> */}
       <h1>Login {state && "As " + state.roleName}</h1>
 
       <LoginForm className="loginForm" onSubmit={handleSubmit}>
