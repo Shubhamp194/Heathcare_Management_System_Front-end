@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../component/Navbar";
-import { styled } from "@mui/system";
-import { Button, List, ListItem, ListItemText } from "@mui/material";
+import { List } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import routes from "../Router/routes";
-
-const Block = styled("div")(({ theme }) => ({
-  height: "100px",
-  margin: "10px",
-}));
+import { baseURL } from "../constans";
+import PatientCard from "../component/PatientCard";
 
 const NewCasesDashboard = () => {
   const [patients, setPatients] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // call api to fetch patients data
@@ -19,11 +16,28 @@ const NewCasesDashboard = () => {
 
   const navigate = useNavigate();
 
-  const handleAttendPatient = () => {
+  const handleAttendPatient = (p) => {
     navigate(routes.HealthRecord, {
-      state: { patient: { data: "all the data of patient" } },
+      state: { data: p },
     });
   };
+
+  useEffect(() => {
+    fetch(baseURL + "/doctor/getNewHealthRecords?loginId=DOC1", {
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.status === 200) return res.json();
+        throw new Error(res);
+      })
+      .then((data) => {
+        setPatients(data[0].length > 0 ? data[0] : []);
+      })
+      .catch((e) => console.error(e))
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <>
@@ -39,120 +53,28 @@ const NewCasesDashboard = () => {
           flexDirection: "column",
         }}
       >
-        <ListItem
-          style={{
-            backgroundColor: "white",
-            width: "50vw",
-            borderRadius: "10px",
-          }}
-        >
-          <ListItemText
-            primary="Patient's&nbsp;Name"
-            secondary="Gender | Age"
-          />
-          <Button
-            variant="outlined"
-            style={{ color: "black", border: "1px solid black" }}
-            onClick={handleAttendPatient}
-          >
-            Attend
-          </Button>
-        </ListItem>
-        <ListItem
-          style={{
-            backgroundColor: "white",
-            width: "50vw",
-            borderRadius: "10px",
-          }}
-        >
-          <ListItemText
-            primary="Patient's&nbsp;Name"
-            secondary="Gender | Age"
-          />
-          <Button
-            variant="outlined"
-            style={{ color: "black", border: "1px solid black" }}
-            onClick={handleAttendPatient}
-          >
-            Attend
-          </Button>
-        </ListItem>
-        <ListItem
-          style={{
-            backgroundColor: "white",
-            width: "50vw",
-            borderRadius: "10px",
-          }}
-        >
-          <ListItemText
-            primary="Patient's&nbsp;Name"
-            secondary="Gender | Age"
-          />
-          <Button
-            variant="outlined"
-            style={{ color: "black", border: "1px solid black" }}
-            onClick={handleAttendPatient}
-          >
-            Attend
-          </Button>
-        </ListItem>
-        <ListItem
-          style={{
-            backgroundColor: "white",
-            width: "50vw",
-            borderRadius: "10px",
-          }}
-        >
-          <ListItemText
-            primary="Patient's&nbsp;Name"
-            secondary="Gender | Age"
-          />
-          <Button
-            variant="outlined"
-            style={{ color: "black", border: "1px solid black" }}
-            onClick={handleAttendPatient}
-          >
-            Attend
-          </Button>
-        </ListItem>
-        <ListItem
-          style={{
-            backgroundColor: "white",
-            width: "50vw",
-            borderRadius: "10px",
-          }}
-        >
-          <ListItemText
-            primary="Patient's&nbsp;Name"
-            secondary="Gender | Age"
-          />
-          <Button
-            variant="outlined"
-            style={{ color: "black", border: "1px solid black" }}
-            onClick={handleAttendPatient}
-          >
-            Attend
-          </Button>
-        </ListItem>
-        <ListItem
-          style={{
-            backgroundColor: "white",
-            width: "50vw",
-            borderRadius: "10px",
-          }}
-        >
-          <ListItemText
-            primary="Patient's&nbsp;Name"
-            secondary="Gender | Age"
-          />
-          <Button
-            variant="outlined"
-            style={{ color: "black", border: "1px solid black" }}
-            onClick={handleAttendPatient}
-          >
-            Attend
-          </Button>
-        </ListItem>
+        {loading ? (
+          <h2 style={{ marginTop: "25vh" }}>Fethcing Data...</h2>
+        ) : patients.length > 0 ? (
+          patients.map((p) => {
+            const { citizen, id } = p;
+            const { fname, lname, dob, gender } = citizen;
+
+            return (
+              <PatientCard
+                key={id}
+                handler={(e) => handleAttendPatient(p)}
+                name={fname + " " + lname}
+                gender={gender}
+                age={dob}
+              />
+            );
+          })
+        ) : (
+          <h2 style={{ marginTop: "25vh" }}>
+            No patient in the queue at this moment.
+          </h2>
+        )}
       </List>
     </>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../component/Navbar";
 import { getTodaysDateInYYYYMMDDFormatSeperateByhyphen as today } from "../utils/utility";
+import { baseURL } from "../constans";
 
 const ReceptionistDashboard = () => {
   const [patientName, setPatientName] = useState("");
@@ -54,20 +55,9 @@ const ReceptionistDashboard = () => {
     obj["currentState"] = "Karnataka";
     obj["currentPincode"] = pincode;
     obj["doctor"] = { loginId: doctor };
-    /* {
 
-      currentStreet1 : "",
-      currentStreet2 : "",
-      currentCity : "",
-      currentState : "",
-      currentPincode : "",
-      doctor:{loginId:""},
-      citizen:{"id":"" only numbers}
-      receptionist : {"loginId":""}
-
-    } */
     const healthRecord = JSON.stringify(obj);
-    fetch("http://172.16.133.196:8081/receptionist/createHealthRecord", {
+    fetch(baseURL + "/receptionist/createHealthRecord", {
       body: healthRecord,
       headers: { "Content-Type": "application/json" },
       method: "POST",
@@ -78,9 +68,8 @@ const ReceptionistDashboard = () => {
         throw new Error(res);
       })
       .then((data) => {
-        alert(data);
+        alert("Record created");
         clearTheForm();
-        // console.log(data);
       })
       .catch((e) => {
         console.error(e);
@@ -290,7 +279,7 @@ const ReceptionistDashboard = () => {
                 borderRadius: "15px",
                 border: "none",
                 cursor: "pointer",
-                boxShadow: "1px 1px 1px 1px rgba(0,0,155,0.5)",
+                boxShadow: "0px 0px 4px 1px rgba(100,155,155,0.85)",
                 fontSize: "1rem",
                 fontWeight: "bold",
                 zIndex: "1",
