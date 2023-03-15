@@ -1,14 +1,8 @@
 import React from "react";
 import { ListItem, ListItemText, Button } from "@mui/material";
+import { calculate_age } from "../utils/utility";
 
 const PatientCard = ({ handler, name, gender, age }) => {
-  const calculate_age = (dob) => {
-    var diff_ms = Date.now() - dob.getTime();
-    var age_dt = new Date(diff_ms);
-
-    return Math.abs(age_dt.getUTCFullYear() - 1970);
-  };
-
   return (
     <ListItem
       style={{
@@ -22,7 +16,8 @@ const PatientCard = ({ handler, name, gender, age }) => {
         secondary={
           (gender === "F" ? "Female" : "Male") +
           " | " +
-          calculate_age(new Date(age))
+          calculate_age(new Date(age)) +
+          " Yr"
         }
       />
       <Button

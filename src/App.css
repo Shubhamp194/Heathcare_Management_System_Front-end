@@ -20,3 +20,23 @@
     flex-basis:20%;
     max-width:35%;
   }
+
+  label{
+    font-size: 20px 
+  }
+
+  input {
+    font-size: 16px;
+    padding: 5px;
+    border: 1px grey solid;
+    flex: 1;
+    border-radius: 9px;
+  }
+
+  textarea {
+    resize: none;
+    font-size: 16px;
+    padding: 5px;
+    border: 1px grey solid;
+    border-radius: 9px
+  }
