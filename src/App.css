@@ -33,10 +33,35 @@
     border-radius: 9px;
   }
 
+  
   textarea {
     resize: none;
     font-size: 16px;
     padding: 5px;
     border: 1px grey solid;
     border-radius: 9px
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 2px solid #7c7979;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: rgb(227, 240, 255);
+  }
+
+  th{
+    text-align: center;
+  }
+
+  #editbtn,#removebtn
+  {
+    text-align: center;
   }
