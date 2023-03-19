@@ -49,11 +49,12 @@ const ReceptionistDashboard = () => {
     e.preventDefault();
 
     let obj = {};
-    obj["currentStreet1"] = "IIITB";
-    obj["citizen"] = { id: healthID };
-    obj["currentCity"] = "Bangalore";
-    obj["currentState"] = "Karnataka";
-    obj["currentPincode"] = pincode;
+    obj["street1"] = "IIITB";
+    obj["citizen"] = { uhId: healthID };
+    obj["city"] = "Bangalore";
+    obj["state"] = "Karnataka";
+    obj["mobileNo"] = contactNo;
+    obj["pincode"] = pincode;
     obj["doctor"] = { loginId: doctor };
 
     const healthRecord = JSON.stringify(obj);
@@ -86,7 +87,7 @@ const ReceptionistDashboard = () => {
       <NavBar showBackButton={false} />
       <h1 style={{ textAlign: "center" }}>Reception Dashboard</h1>
       <p style={{ textAlign: "center", fontSize: "1.5rem" }}>
-        Creat a new case
+        Create a new case
       </p>
 
       <div
@@ -110,7 +111,7 @@ const ReceptionistDashboard = () => {
           onSubmit={handleSubmit}
         >
           <div className="form-item">
-            <label htmlFor="patientName" style={{ fontSize: "20px" }}>
+            {/* <label htmlFor="patientName" style={{ fontSize: "20px" }}>
               Patient Name :{" "}
             </label>
             <input
@@ -127,16 +128,17 @@ const ReceptionistDashboard = () => {
               onChange={handleNameChange}
               value={patientName}
               required
-            />
+            /> */}
 
             <label
               htmlFor="timestamp"
               style={{
                 fontSize: "20px",
-                marginLeft: "50px",
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "flex-end",
+                float: "right",
+                // marginLeft: "50px",
+                // display: "flex",
+                // flexWrap: "wrap",
+                // justifyContent: "flex-end",
               }}
             >
               Date :&nbsp;&nbsp;

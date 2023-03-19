@@ -1,11 +1,14 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import FollowUpModal from "../component/FollowUpModal";
+import { baseURL } from "../constans";
+import routes from "../Router/routes";
 import { calculate_age } from "../utils/utility";
 
-const PatientHealthRecordForm = ({ state }) => {
-  // const { state } = useLocation();
+const PatientHealthRecordForm = () => {
+  const { state } = useLocation();
+  const navigation = useNavigate();
 
   const [patientData, setPatientData] = useState(state.data);
   const [citizenData, setCitizenData] = useState(state.data.citizen);
@@ -36,13 +39,30 @@ const PatientHealthRecordForm = ({ state }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    state["fields"] = "";
-    state["fieldsValues"] = "";
-    state["conclusion"] = diagnosis;
-    state["prescription"] = prescription;
-    state["treatment"] = treatemet;
-    state["followUps"] = followUps;
-    console.log(state);
+    patientData["fields"] = "";
+    patientData["fieldsValues"] = "";
+    patientData["conclusion"] = diagnosis;
+    patientData["prescription"] = prescription;
+    //patientData["treatment"] = treatemet;
+    patientData["followUps"] = followUps;
+
+    let healthRec = JSON.stringify(patientData);
+
+    fetch(baseURL + "/doctor/submitHealthRecord", {
+      body: healthRec,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        if (res.status === 200) return res.json();
+      })
+      .then((data) => {
+        alert(data);
+        navigation(routes.OPD, { replace: true });
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   const handleTreatmentChange = (e) => {

@@ -26,7 +26,7 @@ const generateFollowups = (
   let vitals = selectedVitals.toString();
   let date = new Date(startDate).valueOf();
   let followups = [];
-
+  gap++;
   while (cnt > 0) {
     let obj = {
       dateOfFollowUp: new Date(date).toISOString().substring(0, 10),

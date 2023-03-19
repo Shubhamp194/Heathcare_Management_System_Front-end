@@ -57,12 +57,12 @@ const NewCasesDashboard = () => {
           <h2 style={{ marginTop: "25vh" }}>Fethcing Data...</h2>
         ) : patients.length > 0 ? (
           patients.map((p) => {
-            const { citizen, id } = p;
+            const { citizen, hrId } = p;
             const { fname, lname, dob, gender } = citizen;
 
             return (
               <PatientCard
-                key={id}
+                key={hrId}
                 handler={(e) => handleAttendPatient(p)}
                 name={fname + " " + lname}
                 gender={gender}
