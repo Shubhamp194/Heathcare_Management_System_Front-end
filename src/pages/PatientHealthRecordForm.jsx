@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FollowUpModal from "../component/FollowUpModal";
+import NavBar from "../component/Navbar";
 import { baseURL } from "../constans";
 import routes from "../Router/routes";
 import { calculate_age } from "../utils/utility";
@@ -92,6 +93,7 @@ const PatientHealthRecordForm = () => {
         position: "relative",
       }}
     >
+      <NavBar showBackButton={true} />
       {showModal && (
         <div
           style={{

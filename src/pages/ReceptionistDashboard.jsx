@@ -2,15 +2,24 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../component/Navbar";
 import { getTodaysDateInYYYYMMDDFormatSeperateByhyphen as today } from "../utils/utility";
 import { baseURL } from "../constans";
+import { useLocation } from "react-router-dom";
 
 const ReceptionistDashboard = () => {
-  const [patientName, setPatientName] = useState("");
+  const { state: _state } = useLocation();
+
+  // const [patientName, setPatientName] = useState("");
+  const [doctors] = useState(_state["doctors"]);
   const [healthID, setHealthID] = useState("");
   const [timeStamp, setTimeStamp] = useState();
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [contactNo, setContactNo] = useState("");
   const [doctor, setDoctor] = useState("");
+  const [state, setState] = useState("");
+
+  const handleStateChange = (e) => {
+    setState(e.target.value);
+  };
 
   const handleDoctorChange = (e) => {
     // alert(e.target.value);
@@ -22,7 +31,6 @@ const ReceptionistDashboard = () => {
   }, []);
 
   const clearTheForm = () => {
-    setPatientName("");
     setHealthID("");
     setAddress("");
     setPincode("");
@@ -37,9 +45,9 @@ const ReceptionistDashboard = () => {
   const handleAddressChange = (e) => {
     setAddress(e.target.value);
   };
-  const handleNameChange = (e) => {
-    setPatientName(e.target.value);
-  };
+  // const handleNameChange = (e) => {
+  //   setPatientName(e.target.value);
+  // };
 
   const handleHealthIDChange = (e) => {
     setHealthID(e.target.value);
@@ -49,7 +57,7 @@ const ReceptionistDashboard = () => {
     e.preventDefault();
 
     let obj = {};
-    obj["street1"] = "IIITB";
+    obj["street1"] = address;
     obj["citizen"] = { uhId: healthID };
     obj["city"] = "Bangalore";
     obj["state"] = "Karnataka";
@@ -111,25 +119,6 @@ const ReceptionistDashboard = () => {
           onSubmit={handleSubmit}
         >
           <div className="form-item">
-            {/* <label htmlFor="patientName" style={{ fontSize: "20px" }}>
-              Patient Name :{" "}
-            </label>
-            <input
-              type="text"
-              name="patientName"
-              placeholder="Enter name"
-              style={{
-                fontSize: "16px",
-                padding: "5px",
-                border: "1px grey solid",
-                flex: "1",
-                borderRadius: "9px",
-              }}
-              onChange={handleNameChange}
-              value={patientName}
-              required
-            /> */}
-
             <label
               htmlFor="timestamp"
               style={{
@@ -183,13 +172,30 @@ const ReceptionistDashboard = () => {
           </div>
 
           {/* Patients address */}
+          <div className="form-item">
+            <label htmlFor="state">State : </label>
+            <select
+              style={{ width: "15vw", padding: "10px", borderRadius: "9px" }}
+              placeholder=""
+              name="state"
+              value={state}
+              required
+              onChange={handleStateChange}
+            >
+              <option>Select State</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Uttarpradesh">Uttarpradesh</option>
+              <option value="Maharashtra">Maharashtra</option>
+            </select>
+          </div>
 
           <div className="form-item" style={{}}>
             <label htmlFor="address" style={{ fontSize: "20px" }}>
               Address :
             </label>
             <textarea
-              placeholder="Enter Address"
+              placeholder="Enter Full Address (Street,landmark etc)"
               name="address"
               cols={35}
               rows={3}
@@ -262,9 +268,18 @@ const ReceptionistDashboard = () => {
               onChange={handleDoctorChange}
               required
             >
-              <option>Select Doctor</option>
-              <option value={"DOC1"}>Doctor 1</option>
-              <option value={"DOC2"}>Doctor 2</option>
+              {[<option key="-1">Select Doctor</option>].concat(
+                doctors.map((d) => {
+                  let { fname, lname, uhId } = d["citizen"];
+                  return (
+                    <option key={uhId} value={d["loginId"]}>
+                      {fname + " " + lname}
+                    </option>
+                  );
+                })
+              )}
+              {/* <option value={"DOC1"}>Doctor 1</option>
+              <option value={"DOC2"}>Doctor 2</option> */}
             </select>
           </div>
           <div

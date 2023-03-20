@@ -23,19 +23,14 @@ const RoleCard = ({ role }) => {
   // const history = useHistory();
 
   const handleClick = () => {
-    // navigate(routes.LoginPage, {
-    //   state: {
-    //     roleName: role,
-    //     roleId: roles.find((rl) => rl.name === role).id,
-    //   },
-    // });
+    navigate(routes.LoginPage);
 
     // without authenticaction as of now
-    if (role === roles[0].name) {
-      navigate(routes.ReceptionistDashboard, { replace: true });
-    } else if (role === roles[1].name) {
-      navigate(routes.DoctorDashboard, { replace: true });
-    }
+    // if (role === roles[0].name) {
+    //   navigate(routes.ReceptionistDashboard, { replace: true });
+    // } else if (role === roles[1].name) {
+    //   navigate(routes.DoctorDashboard, { replace: true });
+    // }
   };
 
   return (
