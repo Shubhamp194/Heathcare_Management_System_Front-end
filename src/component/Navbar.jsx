@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 import routes from "../Router/routes";
 
 const NavBar = ({ showBackButton = false }) => {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   let buttonStyle = {
     margin: "0px",
@@ -56,6 +58,7 @@ const NavBar = ({ showBackButton = false }) => {
             cursor: "pointer",
           }}
           onClick={(e) => {
+            setUser(null);
             navigate(routes.LandingPage, { replace: true });
           }}
         >

@@ -3,6 +3,8 @@ import NavBar from "../component/Navbar";
 import { getTodaysDateInYYYYMMDDFormatSeperateByhyphen as today } from "../utils/utility";
 import { baseURL } from "../constans";
 import { useLocation } from "react-router-dom";
+import CustomizedSnackbars from "../component/SnackBar";
+import { STATES, DISTRICTTOTALUKA, STATETODISTRICT } from "../utils/utility";
 
 const ReceptionistDashboard = () => {
   const { state: _state } = useLocation();
@@ -16,9 +18,16 @@ const ReceptionistDashboard = () => {
   const [contactNo, setContactNo] = useState("");
   const [doctor, setDoctor] = useState("");
   const [state, setState] = useState("");
+  const [district, setDistrict] = useState("");
+  const [city, setCity] = useState("");
+
+  const [snackState, setSnackState] = useState(0);
 
   const handleStateChange = (e) => {
     setState(e.target.value);
+
+    setCity("");
+    setDistrict("");
   };
 
   const handleDoctorChange = (e) => {
@@ -35,6 +44,7 @@ const ReceptionistDashboard = () => {
     setAddress("");
     setPincode("");
     setContactNo("");
+    setState("");
     setDoctor("");
   };
 
@@ -59,8 +69,9 @@ const ReceptionistDashboard = () => {
     let obj = {};
     obj["street1"] = address;
     obj["citizen"] = { uhId: healthID };
-    obj["city"] = "Bangalore";
-    obj["state"] = "Karnataka";
+    obj["city"] = city;
+    obj["state"] = state;
+    obj["district"] = district;
     obj["mobileNo"] = contactNo;
     obj["pincode"] = pincode;
     obj["doctor"] = { loginId: doctor };
@@ -77,13 +88,16 @@ const ReceptionistDashboard = () => {
         throw new Error(res);
       })
       .then((data) => {
-        alert("Record created");
-        clearTheForm();
+        setSnackState(1);
       })
       .catch((e) => {
+        setSnackState(2);
         console.error(e);
       })
-      .finally(() => {});
+      .finally(() => {
+        clearTheForm();
+        setTimeout(() => setSnackState(0), 4000);
+      });
   };
 
   const handlePinCodeChange = (e) => {
@@ -93,6 +107,15 @@ const ReceptionistDashboard = () => {
   return (
     <div className="reception">
       <NavBar showBackButton={false} />
+      <CustomizedSnackbars
+        state={snackState > 0}
+        message={
+          snackState > 0 && snackState === 1
+            ? "record created"
+            : "something went wrong"
+        }
+        severity={snackState > 0 && snackState === 1 ? "success" : "error"}
+      />
       <h1 style={{ textAlign: "center" }}>Reception Dashboard</h1>
       <p style={{ textAlign: "center", fontSize: "1.5rem" }}>
         Create a new case
@@ -182,11 +205,78 @@ const ReceptionistDashboard = () => {
               required
               onChange={handleStateChange}
             >
-              <option>Select State</option>
-              <option value="Gujarat">Gujarat</option>
-              <option value="Rajasthan">Rajasthan</option>
-              <option value="Uttarpradesh">Uttarpradesh</option>
-              <option value="Maharashtra">Maharashtra</option>
+              {[
+                <option value={""} key={0}>
+                  Select State
+                </option>,
+              ].concat(
+                STATES.map((s, id) => {
+                  return (
+                    <option key={id + 1} value={s}>
+                      {s}
+                    </option>
+                  );
+                })
+              )}
+            </select>
+          </div>
+          <div className="form-item">
+            <label htmlFor="district">District : </label>
+            <select
+              style={{ width: "15vw", padding: "10px", borderRadius: "9px" }}
+              placeholder=""
+              name="district"
+              value={district}
+              required
+              onChange={(e) => {
+                setDistrict(e.target.value);
+                if (district === "") setCity("");
+              }}
+            >
+              {[
+                <option value={""} key={0}>
+                  Select District
+                </option>,
+              ].concat(
+                state !== "" &&
+                  STATETODISTRICT[state].map((s, id) => {
+                    return (
+                      <option key={id + 1} value={s}>
+                        {s}
+                      </option>
+                    );
+                  })
+              )}
+            </select>
+          </div>
+
+          <div className="form-item">
+            <label htmlFor="city">City : </label>
+            <select
+              style={{ width: "15vw", padding: "10px", borderRadius: "9px" }}
+              placeholder=""
+              name="city"
+              value={city}
+              required
+              onChange={(e) => {
+                setCity(e.target.value);
+                //if (district === "") setCity("");
+              }}
+            >
+              {[
+                <option value={""} key={0}>
+                  Select City
+                </option>,
+              ].concat(
+                district !== "" &&
+                  DISTRICTTOTALUKA[district].map((s, id) => {
+                    return (
+                      <option key={id + 1} value={s}>
+                        {s}
+                      </option>
+                    );
+                  })
+              )}
             </select>
           </div>
 
@@ -263,12 +353,15 @@ const ReceptionistDashboard = () => {
               name="doctorlist"
               id="doctorlist"
               style={{ width: "15vw", padding: "10px", borderRadius: "9px" }}
-              placeholder="blah"
               value={doctor}
               onChange={handleDoctorChange}
               required
             >
-              {[<option key="-1">Select Doctor</option>].concat(
+              {[
+                <option key="-1" value={""}>
+                  Select Doctor
+                </option>,
+              ].concat(
                 doctors.map((d) => {
                   let { fname, lname, uhId } = d["citizen"];
                   return (

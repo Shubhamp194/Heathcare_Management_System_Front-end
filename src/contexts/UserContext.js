@@ -5,7 +5,7 @@ const UserContext = createContext({});
 const UserContextProvider = ({ children }) => {
   //   const [userId, setUserId] = useState("");
   //   const [userName, setUserName] = useState("");
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   //   const [hospitalId, setHospitalId] = useState("")
 
   return (

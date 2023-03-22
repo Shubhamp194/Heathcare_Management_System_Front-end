@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import NavBar from "../component/Navbar";
 import { List } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import routes from "../Router/routes";
 import { baseURL } from "../constans";
 import PatientCard from "../component/PatientCard";
+import { UserContext } from "../contexts/UserContext";
 
 const NewCasesDashboard = () => {
   const [patients, setPatients] = useState([]);
@@ -16,6 +17,8 @@ const NewCasesDashboard = () => {
 
   const navigate = useNavigate();
 
+  const { user } = useContext(UserContext);
+
   const handleAttendPatient = (p) => {
     navigate(routes.HealthRecord, {
       state: { data: p },
@@ -23,7 +26,7 @@ const NewCasesDashboard = () => {
   };
 
   useEffect(() => {
-    fetch(baseURL + "/doctor/getNewHealthRecords?loginId=DOC1", {
+    fetch(baseURL + "/doctor/getNewHealthRecords?loginId=" + user.loginId, {
       method: "GET",
     })
       .then((res) => {

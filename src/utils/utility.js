@@ -98,3 +98,55 @@ export const state2 = {
     ],
   },
 };
+
+// Define the objects
+
+export const STATES = ["Karnataka", "Gujarat"];
+
+export const STATETODISTRICT = {
+  Karnataka: ["Bangalore", "Mysore", "Hassan"],
+  Gujarat: ["Ahmedabad", "Surat", "Gandhinagar", "Baroda"],
+};
+
+export const DISTRICTTOTALUKA = {
+  Ahmedabad: ["Dholka", "Daskroi"],
+  Surat: ["Nandigram", "Bardoli"],
+  Gandhinagar: ["Kalol", "Kadi"],
+  Baroda: ["Dabhoi", "Vasad"],
+  Bangalore: [
+    "Adugodi",
+    "Banashankari",
+    "Basavanagudi",
+    "Bommanahalli",
+    "Chickpet",
+    "Electronic City",
+    "HSR Layout",
+    "Indiranagar",
+    "Jayanagar",
+    "Malleswaram",
+  ],
+  Mysore: [
+    "Bannimantap",
+    "Nazarbad",
+    "Kuvempunagar",
+    "Gokulam",
+    "Saraswathipuram",
+    "Yadavagiri",
+    "Siddarthanagar",
+    "Vivekanandanagar",
+    "Jayalakshmipuram",
+    "Kesare",
+  ],
+  Hassan: [
+    "Alur",
+    "Arakalagudu",
+    "Belur",
+    "Channarayapatna",
+    "Hassan",
+    "Hiriyur",
+    "Holenarsipur",
+    "K.R.Pet",
+    "Sakleshpur",
+    "Santhigiri",
+  ],
+};

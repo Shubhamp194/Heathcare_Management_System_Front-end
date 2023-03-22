@@ -93,7 +93,39 @@ const PatientHealthRecordForm = () => {
         position: "relative",
       }}
     >
-      <NavBar showBackButton={true} />
+      <div style={{ margin: "0", height: "1%" }}>
+        <button
+          style={{
+            backgroundColor: "",
+            borderRadius: "5px",
+            fontSize: "20px",
+            width: "70px",
+            textAlign: "center",
+            height: "30px",
+            padding: "0 10px",
+            color: "black",
+            fontWeight: "bold",
+
+            marginLeft: "5%",
+          }}
+          onClick={(e) => {
+            navigation(-1);
+          }}
+        >
+          Back
+        </button>
+        <h1
+          style={{
+            marginLeft: "26%",
+            display: "inline-block",
+
+            marginBottom: "0",
+          }}
+        >
+          {" "}
+          Patient's Health Record
+        </h1>
+      </div>
       {showModal && (
         <div
           style={{
@@ -114,7 +146,7 @@ const PatientHealthRecordForm = () => {
           />
         </div>
       )}
-      <h1 style={{ textAlign: "center" }}> Patient's Health Record</h1>
+
       <form
         className="healthRecForm"
         style={{

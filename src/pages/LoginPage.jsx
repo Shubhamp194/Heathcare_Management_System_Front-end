@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { UserContext } from "../contexts/UserContext";
-import { baseURL, roles } from "../constans";
+import { baseURL } from "../constans";
 import routes from "../Router/routes";
 
 const LoginForm = styled("form")(({ theme }) => ({
@@ -33,8 +33,14 @@ const LoginPage = () => {
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-
+  const [loading, setLoading] = useState(true);
   // const { state } = useLocation();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -82,7 +88,9 @@ const LoginPage = () => {
     setUserName(e.target.value);
   };
 
-  return (
+  return loading ? (
+    <div>{"loading..."}</div>
+  ) : (
     <Container>
       {/* <NavBar showBackButton={true} /> */}
       <h1>Login</h1>
