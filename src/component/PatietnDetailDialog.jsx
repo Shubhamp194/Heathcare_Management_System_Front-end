@@ -49,7 +49,7 @@ const DataContainer = ({ citizen, handler, closeModal }) => {
           marginBottom: "20px",
           backgroundColor: "rgba(0,100,200,0)",
         }}
-        onClick={() => handler()}
+        onClick={(e) => handler(e)}
       >
         confirm and submit
       </button>

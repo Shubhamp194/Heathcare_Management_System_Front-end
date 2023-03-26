@@ -44,7 +44,7 @@ const PatientHealthRecordForm = () => {
     patientData["fieldsValues"] = "";
     patientData["conclusion"] = diagnosis;
     patientData["prescription"] = prescription;
-    //patientData["treatment"] = treatemet;
+    patientData["treatment"] = treatemet;
     patientData["followUps"] = followUps;
 
     let healthRec = JSON.stringify(patientData);

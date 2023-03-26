@@ -51,6 +51,8 @@ const ReceptionistDashboard = () => {
     setPincode("");
     setContactNo("");
     setState("");
+    setDistrict("");
+    setCity("");
     setDoctor("");
   };
 
@@ -74,9 +76,9 @@ const ReceptionistDashboard = () => {
 
     fetch(baseURL + "/receptionist/confirmation?uhId=" + healthID, {
       method: "GET",
-      headers: new Headers({
-        Authorization: localStorage.getItem("token").toString(),
-      }),
+      // headers: new Headers({
+      //   // Authorization: localStorage.getItem("token").toString(),
+      // }),
     })
       .then((res) => {
         if (res.status === 200) return res.json();
@@ -85,6 +87,8 @@ const ReceptionistDashboard = () => {
       })
       .then((data) => {
         console.log(data);
+        setCitizen(data[0]);
+        setShowDialog(true);
       })
       .catch((e) => {
         console.error(e);
@@ -94,6 +98,7 @@ const ReceptionistDashboard = () => {
   const handleSubmit = (e) => {
     // fetch patient details to confirm
 
+    e.preventDefault();
     let obj = {};
     obj["street1"] = address;
     obj["citizen"] = { uhId: healthID };
@@ -123,6 +128,7 @@ const ReceptionistDashboard = () => {
         console.error(e);
       })
       .finally(() => {
+        setShowDialog(false);
         clearTheForm();
         setTimeout(() => setSnackState(0), 4000);
       });
