@@ -76,9 +76,9 @@ const ReceptionistDashboard = () => {
 
     fetch(baseURL + "/receptionist/confirmation?uhId=" + healthID, {
       method: "GET",
-      // headers: new Headers({
-      //   // Authorization: localStorage.getItem("token").toString(),
-      // }),
+      headers: new Headers({
+        Authorization: localStorage.getItem("token").toString(),
+      }),
     })
       .then((res) => {
         if (res.status === 200) return res.json();
@@ -112,7 +112,10 @@ const ReceptionistDashboard = () => {
     const healthRecord = JSON.stringify(obj);
     fetch(baseURL + "/receptionist/createHealthRecord", {
       body: healthRecord,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token").toString(),
+      },
       method: "POST",
     })
       .then((res) => {
