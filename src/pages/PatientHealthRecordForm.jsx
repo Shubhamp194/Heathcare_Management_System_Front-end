@@ -52,7 +52,12 @@ const PatientHealthRecordForm = () => {
     fetch(baseURL + "/doctor/submitHealthRecord", {
       body: healthRec,
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          localStorage.getItem("token") &&
+          localStorage.getItem("token").toString(),
+      },
     })
       .then((res) => {
         if (res.status === 200) return res.json();

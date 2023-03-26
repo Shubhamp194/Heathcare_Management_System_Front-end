@@ -77,7 +77,9 @@ const ReceptionistDashboard = () => {
     fetch(baseURL + "/receptionist/confirmation?uhId=" + healthID, {
       method: "GET",
       headers: new Headers({
-        Authorization: localStorage.getItem("token").toString(),
+        Authorization:
+          localStorage.getItem("token") &&
+          localStorage.getItem("token").toString(),
       }),
     })
       .then((res) => {
@@ -114,7 +116,9 @@ const ReceptionistDashboard = () => {
       body: healthRecord,
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token").toString(),
+        Authorization:
+          localStorage.getItem("token") &&
+          localStorage.getItem("token").toString(),
       },
       method: "POST",
     })

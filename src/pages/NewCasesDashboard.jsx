@@ -29,6 +29,11 @@ const NewCasesDashboard = () => {
   useEffect(() => {
     fetch(baseURL + "/doctor/getNewHealthRecords?loginId=" + user.loginId, {
       method: "GET",
+      headers: {
+        Authorization:
+          localStorage.getItem("token") &&
+          localStorage.getItem("token").toString(),
+      },
     })
       .then((res) => {
         if (res.status === 200) return res.json();
