@@ -10,6 +10,10 @@ export const calculate_age = (dob) => {
   return Math.abs(age_dt.getUTCFullYear() - 1970);
 };
 
+export const removeToken = () => {
+  localStorage.removeItem("token");
+};
+
 export const vitals = [
   "Blood Sugar",
   "Blood Oxygen",
@@ -150,3 +154,6 @@ export const DISTRICTTOTALUKA = {
     "Santhigiri",
   ],
 };
+
+export const token =
+  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSRUMxMyIsImlhdCI6MTY3OTU4NzM3NSwiZXhwIjoxNjc5NjczNzc1fQ.r5pV2-Q6TIDiGTwKFKDm-sws6MnTcT5wrv5BJBp08X8";

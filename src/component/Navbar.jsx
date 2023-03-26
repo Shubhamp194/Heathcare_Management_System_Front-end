@@ -58,6 +58,7 @@ const NavBar = ({ showBackButton = false }) => {
             cursor: "pointer",
           }}
           onClick={(e) => {
+            localStorage.removeItem("token");
             setUser(null);
             navigate(routes.LandingPage, { replace: true });
           }}

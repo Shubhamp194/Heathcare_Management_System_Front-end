@@ -5,7 +5,7 @@ import FollowUpModal from "../component/FollowUpModal";
 import NavBar from "../component/Navbar";
 import { baseURL } from "../constans";
 import routes from "../Router/routes";
-import { calculate_age } from "../utils/utility";
+import { calculate_age, removeToken } from "../utils/utility";
 
 const PatientHealthRecordForm = () => {
   const { state } = useLocation();
@@ -56,6 +56,8 @@ const PatientHealthRecordForm = () => {
     })
       .then((res) => {
         if (res.status === 200) return res.json();
+        else if (res.status === 401) removeToken();
+        throw res;
       })
       .then((data) => {
         alert(data);

@@ -6,6 +6,7 @@ import routes from "../Router/routes";
 import { baseURL } from "../constans";
 import PatientCard from "../component/PatientCard";
 import { UserContext } from "../contexts/UserContext";
+import { removeToken } from "../utils/utility";
 
 const NewCasesDashboard = () => {
   const [patients, setPatients] = useState([]);
@@ -31,6 +32,9 @@ const NewCasesDashboard = () => {
     })
       .then((res) => {
         if (res.status === 200) return res.json();
+        else if (res.status === 401) {
+          removeToken();
+        }
         throw new Error(res);
       })
       .then((data) => {

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../component/Navbar";
-import { getTodaysDateInYYYYMMDDFormatSeperateByhyphen as today } from "../utils/utility";
+import {
+  getTodaysDateInYYYYMMDDFormatSeperateByhyphen as today,
+  removeToken,
+} from "../utils/utility";
 import { baseURL } from "../constans";
 import { useLocation } from "react-router-dom";
 import CustomizedSnackbars from "../component/SnackBar";
 import { STATES, DISTRICTTOTALUKA, STATETODISTRICT } from "../utils/utility";
+import PatientDetailDialog from "../component/PatietnDetailDialog";
 
 const ReceptionistDashboard = () => {
   const { state: _state } = useLocation();
@@ -22,6 +26,8 @@ const ReceptionistDashboard = () => {
   const [city, setCity] = useState("");
 
   const [snackState, setSnackState] = useState(0);
+  const [showDialog, setShowDialog] = useState(false);
+  const [citizen, setCitizen] = useState(null);
 
   const handleStateChange = (e) => {
     setState(e.target.value);
@@ -63,8 +69,30 @@ const ReceptionistDashboard = () => {
     setHealthID(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmitMiddleWare = async (e) => {
     e.preventDefault();
+
+    fetch(baseURL + "/receptionist/confirmation?uhId=" + healthID, {
+      method: "GET",
+      headers: new Headers({
+        Authorization: localStorage.getItem("token").toString(),
+      }),
+    })
+      .then((res) => {
+        if (res.status === 200) return res.json();
+        else if (res.status === 401) removeToken();
+        throw res;
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  const handleSubmit = (e) => {
+    // fetch patient details to confirm
 
     let obj = {};
     obj["street1"] = address;
@@ -84,7 +112,7 @@ const ReceptionistDashboard = () => {
     })
       .then((res) => {
         if (res.status === 200) return res.json();
-
+        else if (res.status === 401) removeToken();
         throw new Error(res);
       })
       .then((data) => {
@@ -105,7 +133,23 @@ const ReceptionistDashboard = () => {
   };
 
   return (
-    <div className="reception">
+    <div className="reception" style={{ position: "relative" }}>
+      {showDialog && (
+        <div
+          style={{
+            position: "absolute",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            width: "100vw",
+            height: "100vh",
+          }}
+        >
+          <PatientDetailDialog
+            citizen={citizen}
+            closeModal={setShowDialog}
+            handler={handleSubmit}
+          />
+        </div>
+      )}
       <NavBar showBackButton={false} />
       <CustomizedSnackbars
         state={snackState > 0}
@@ -139,7 +183,7 @@ const ReceptionistDashboard = () => {
             padding: "20px",
             marginBottom: "10vh",
           }}
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmitMiddleWare}
         >
           <div className="form-item">
             <label

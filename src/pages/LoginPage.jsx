@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { baseURL } from "../constans";
 import routes from "../Router/routes";
+import { removeToken, token } from "../utils/utility";
 
 const LoginForm = styled("form")(({ theme }) => ({
   backgroundColor: "#FAFAFA",
@@ -53,7 +54,11 @@ const LoginPage = () => {
       body: obj,
     })
       .then((res) => {
-        if (res.status === 200) return res.json();
+        if (res.status === 200) {
+          let token = res.headers.get("token");
+          localStorage.setItem("token", "Bearer " + token);
+          return res.json();
+        } else if (res.status === 401) removeToken();
         throw res;
       })
       .then((data) => {
