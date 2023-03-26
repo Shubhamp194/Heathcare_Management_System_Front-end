@@ -16,7 +16,7 @@ const ReceptionistDashboard = () => {
   // const [patientName, setPatientName] = useState("");
   const [doctors] = useState(_state["doctors"]);
   const [healthID, setHealthID] = useState("");
-  const [timeStamp, setTimeStamp] = useState();
+  const [timeStamp, setTimeStamp] = useState("");
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [contactNo, setContactNo] = useState("");
