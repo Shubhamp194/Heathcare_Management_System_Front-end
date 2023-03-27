@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FollowUpModal from "../component/FollowUpModal";
 import NavBar from "../component/Navbar";
+import PatientCard from "../component/PatientCard";
 import { baseURL } from "../constans";
 import routes from "../Router/routes";
 import { calculate_age, removeToken } from "../utils/utility";
@@ -18,6 +19,7 @@ const PatientHealthRecordForm = () => {
   const [prescription, setPrescription] = useState("");
   const [treatemet, setTreatment] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   const handleDiagnosisChange = (e) => {
     setDiagnosis(e.target.value);
@@ -220,48 +222,109 @@ const PatientHealthRecordForm = () => {
           </div>
         </div>
         <div className="healthDetails" style={{ marginTop: "10vh" }}>
-          <div className="form-item">
-            <label htmlFor="diagnosis">Symptoms / Diagnosis : </label>
-            <textarea
-              name="diagnosis"
-              placeholder="your diagnosis"
-              cols={50}
-              rows={5}
-              value={diagnosis}
-              required
-              onChange={handleDiagnosisChange}
-            />
-          </div>
+          <div style={{ display: "flex" }}>
+            <div style={{ flex: 1, backgroundColor: "" }}>
+              <div className="">
+                <label htmlFor="diagnosis">Symptoms / Diagnosis : </label>
+                {/* <br />
+                <br /> */}
+                <textarea
+                  name="diagnosis"
+                  placeholder="your diagnosis"
+                  cols={50}
+                  rows={5}
+                  value={diagnosis}
+                  required
+                  onChange={handleDiagnosisChange}
+                />
+              </div>
 
-          <div className="form-item">
-            <label htmlFor="treatment">Treatment : </label>
-            <textarea
-              name="treatment"
-              placeholder="what treatment given..."
-              cols={50}
-              rows={5}
-              required
-              value={treatemet}
-              onChange={handleTreatmentChange}
-            />
-          </div>
+              <div className="" style={{ marginTop: "2%" }}>
+                <label htmlFor="treatment">Treatment : </label>
+                {/* <br />
+                <br /> */}
+                <textarea
+                  name="treatment"
+                  placeholder="what treatment given..."
+                  cols={50}
+                  rows={5}
+                  required
+                  value={treatemet}
+                  onChange={handleTreatmentChange}
+                />
+              </div>
 
-          <div className="form-item">
-            <label htmlFor="presciption">Prescription : </label>
-            <textarea
-              name="prescription"
-              placeholder="prescription for patient"
-              cols={50}
-              rows={5}
-              required
-              value={prescription}
-              onChange={handlePrescriptionChange}
-            />
+              <div className="" style={{ marginTop: "2%" }}>
+                <label htmlFor="presciption">Prescription : </label>
+                {/* <br />
+                <br /> */}
+                <textarea
+                  name="prescription"
+                  placeholder="prescription for patient"
+                  cols={50}
+                  rows={5}
+                  required
+                  value={prescription}
+                  onChange={handlePrescriptionChange}
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                flex: 1,
+                backgroundColor: "",
+                display: "flex",
+                alignContent: "center",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                border: "1px solid grey",
+              }}
+            >
+              {consent ? (
+                <div
+                  style={{
+                    overflowY: "auto",
+                    maxWidth: "613px",
+                    minHeight: "424px",
+                    maxHeight: "424px",
+                  }}
+                >
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((v, key) => (
+                    <div key={v} style={{ border: "1px solid", margin: "5px" }}>
+                      <PatientCard />
+                    </div>
+                  ))}
+                  {/* <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
+                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p> */}
+                  {/* <p style={{ backgroundColor: "whitesmoke" }}>hello</p> */}
+                </div>
+              ) : (
+                <>
+                  <input
+                    type="checkbox"
+                    style={{ height: "20px", maxWidth: "20px", margin: 0 }}
+                    onChange={(e) => setConsent(e.target.checked)}
+                  />
+                  &nbsp;Does patient agree for consent ?
+                </>
+              )}
+            </div>
           </div>
-
           <Button
             variant="outlined"
             style={{
+              marginTop: "2%",
               marginLeft: "38vw",
               fontWeight: "bold",
               border: "2px solid",

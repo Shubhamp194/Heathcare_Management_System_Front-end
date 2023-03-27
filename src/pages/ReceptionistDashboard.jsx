@@ -10,6 +10,24 @@ import CustomizedSnackbars from "../component/SnackBar";
 import { STATES, DISTRICTTOTALUKA, STATETODISTRICT } from "../utils/utility";
 import PatientDetailDialog from "../component/PatietnDetailDialog";
 
+const successSnack = {
+  state: true,
+  message: "Record Created",
+  severity: "success",
+};
+
+const emptySnack = {
+  state: false,
+  message: "",
+  severity: "info",
+};
+
+const failureSnack = {
+  state: true,
+  message: "Something Went Wrong",
+  severity: "error",
+};
+
 const ReceptionistDashboard = () => {
   const { state: _state } = useLocation();
 
@@ -25,7 +43,7 @@ const ReceptionistDashboard = () => {
   const [district, setDistrict] = useState("");
   const [city, setCity] = useState("");
 
-  const [snackState, setSnackState] = useState(0);
+  const [snackState, setSnackState] = useState(emptySnack);
   const [showDialog, setShowDialog] = useState(false);
   const [citizen, setCitizen] = useState(null);
 
@@ -128,16 +146,16 @@ const ReceptionistDashboard = () => {
         throw new Error(res);
       })
       .then((data) => {
-        setSnackState(1);
+        setSnackState(successSnack);
       })
       .catch((e) => {
-        setSnackState(2);
+        setSnackState(failureSnack);
         console.error(e);
       })
       .finally(() => {
         setShowDialog(false);
         clearTheForm();
-        setTimeout(() => setSnackState(0), 4000);
+        setTimeout(() => setSnackState(emptySnack), 4000);
       });
   };
 
@@ -148,30 +166,22 @@ const ReceptionistDashboard = () => {
   return (
     <div className="reception" style={{ position: "relative" }}>
       {showDialog && (
-        <div
-          style={{
-            position: "absolute",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            width: "100vw",
-            height: "100vh",
-          }}
-        >
-          <PatientDetailDialog
-            citizen={citizen}
-            closeModal={setShowDialog}
-            handler={handleSubmit}
-          />
-        </div>
+        <PatientDetailDialog
+          citizen={citizen}
+          closeModal={setShowDialog}
+          handler={handleSubmit}
+        />
       )}
       <NavBar showBackButton={false} />
       <CustomizedSnackbars
-        state={snackState > 0}
-        message={
-          snackState > 0 && snackState === 1
-            ? "record created"
-            : "something went wrong"
-        }
-        severity={snackState > 0 && snackState === 1 ? "success" : "error"}
+        {...snackState}
+        // state={snackState > 0}
+        // message={
+        //   snackState > 0 && snackState === 1
+        //     ? "record created"
+        //     : "something went wrong"
+        // }
+        // severity={snackState > 0 && snackState === 1 ? "success" : "error"}
       />
       <h1 style={{ textAlign: "center" }}>Reception Dashboard</h1>
       <p style={{ textAlign: "center", fontSize: "1.5rem" }}>

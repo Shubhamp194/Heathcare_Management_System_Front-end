@@ -4,12 +4,12 @@ const DataContainer = ({ citizen, handler, closeModal }) => {
   return (
     <div
       style={{
+        overflow: "auto",
         backgroundColor: "white",
         position: "fixed",
-        left: "23%",
-        top: "10%",
+        marginTop: "7%",
+        marginLeft: "22%",
         width: "55%",
-        // height: "70%",
         display: "flex",
         flexWrap: "wrap",
         borderRadius: "15px",
@@ -22,7 +22,7 @@ const DataContainer = ({ citizen, handler, closeModal }) => {
         <div
           style={{
             display: "inline",
-            float: "right",
+            marginLeft: "100px",
             cursor: "pointer",
             fontSize: "28px",
           }}
@@ -61,7 +61,18 @@ const PatientDetailDialog = ({ citizen, handler, closeModal }) => {
   const [loading, isLoading] = useState(false);
 
   return (
-    <div className="patientDataContainer">
+    <div
+      className="patientDataContainer"
+      style={{
+        backgroundColor: "rgba(0,0,0,0.5)",
+        position: "absolute",
+        left: "0px",
+        top: "0px",
+        bottom: "0px",
+        right: "0",
+        width: "100vw",
+      }}
+    >
       {loading ? (
         <h2>Loading...</h2>
       ) : (
