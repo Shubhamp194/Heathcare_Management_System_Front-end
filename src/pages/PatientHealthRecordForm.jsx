@@ -2,7 +2,8 @@ import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FollowUpModal from "../component/FollowUpModal";
-import NavBar from "../component/Navbar";
+import HRCard from "../component/HealthRecordCard";
+import HealthRecordModal from "../component/HealthRecordModal";
 import PatientCard from "../component/PatientCard";
 import { baseURL } from "../constans";
 import routes from "../Router/routes";
@@ -20,6 +21,9 @@ const PatientHealthRecordForm = () => {
   const [treatemet, setTreatment] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [consent, setConsent] = useState(false);
+  const [pastHealthRec, setPastHealthRec] = useState([]);
+  const [showHRModal, setShowHRModal] = useState(false);
+  const [healthRec, setHealthRec] = useState({});
 
   const handleDiagnosisChange = (e) => {
     setDiagnosis(e.target.value);
@@ -38,6 +42,31 @@ const PatientHealthRecordForm = () => {
       );
     });
     setFollowUps(arr);
+  };
+
+  const fetchPastHR = () => {
+    fetch(baseURL + "/doctor/getConsentData?uhId=" + citizenData.uhId, {
+      method: "GET",
+      headers: {
+        Authorization:
+          localStorage.getItem("token") &&
+          localStorage.getItem("token").toString(),
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) return res.json();
+        throw res;
+      })
+      .then((data) => {
+        if (data[0].length > 0) setPastHealthRec(data[0]);
+        console.log(data);
+      })
+      .catch((e) => console.error(e));
+  };
+
+  const handleHRModal = (hr) => {
+    setHealthRec(hr);
+    setShowHRModal(true);
   };
 
   const handleSubmit = (e) => {
@@ -155,7 +184,23 @@ const PatientHealthRecordForm = () => {
           />
         </div>
       )}
-
+      {showHRModal && (
+        <div
+          style={{
+            position: "absolute",
+            left: "0px",
+            top: "0px",
+            bottom: "0px",
+            right: "0",
+            backgroundColor: "rgba(0,0,0,0.75)",
+            zIndex: 1,
+            width: "100vw",
+            height: "",
+          }}
+        >
+          <HealthRecordModal healthRecord />
+        </div>
+      )}
       <form
         className="healthRecForm"
         style={{
@@ -165,7 +210,9 @@ const PatientHealthRecordForm = () => {
           borderRadius: "20px",
           padding: "20px",
         }}
-        onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
       >
         <div
           className="demographicDetails"
@@ -274,11 +321,14 @@ const PatientHealthRecordForm = () => {
                 flex: 1,
                 backgroundColor: "",
                 display: "flex",
-                alignContent: "center",
-                justifyContent: "center",
+                alignContent: !consent ? "center" : "",
+                justifyContent: !consent ? "center" : "flex-start",
                 flexWrap: "wrap",
-                border: "1px solid grey",
+                flexDirection: !consent ? "row" : "column",
+
+                // border: "1px solid grey",
               }}
+              className="hrContainer"
             >
               {consent ? (
                 <div
@@ -289,34 +339,23 @@ const PatientHealthRecordForm = () => {
                     maxHeight: "424px",
                   }}
                 >
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((v, key) => (
-                    <div key={v} style={{ border: "1px solid", margin: "5px" }}>
-                      <PatientCard />
+                  {pastHealthRec.map((v, key) => (
+                    <div key={key} style={{ margin: "5px" }}>
+                      <HRCard hr={v} modalHandler={handleHRModal} />
                     </div>
                   ))}
-                  {/* <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p>
-                  <p style={{ backgroundColor: "whitesmoke" }}>hello</p> */}
-                  {/* <p style={{ backgroundColor: "whitesmoke" }}>hello</p> */}
                 </div>
               ) : (
                 <>
                   <input
                     type="checkbox"
                     style={{ height: "20px", maxWidth: "20px", margin: 0 }}
-                    onChange={(e) => setConsent(e.target.checked)}
+                    onChange={(e) => {
+                      fetchPastHR();
+                      setConsent(e.target.checked);
+                    }}
                   />
-                  &nbsp;Does patient agree for consent ?
+                  &nbsp;Patient consent for past health records?
                 </>
               )}
             </div>
@@ -376,6 +415,7 @@ const PatientHealthRecordForm = () => {
                 fontWeight: "bold",
                 border: "2px solid",
               }}
+              onClick={handleSubmit}
             >
               Submit{" "}
             </Button>

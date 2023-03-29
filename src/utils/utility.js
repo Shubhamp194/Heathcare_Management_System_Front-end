@@ -105,54 +105,59 @@ export const state2 = {
 
 // Define the objects
 
-export const STATES = ["Karnataka", "Gujarat"];
+export const STATES = ["Karnataka"];
 
 export const STATETODISTRICT = {
   Karnataka: ["Bangalore", "Mysore", "Hassan"],
-  Gujarat: ["Ahmedabad", "Surat", "Gandhinagar", "Baroda"],
+  Gujarat: ["Ahmedabad", "Anand", "Navsari"],
 };
 
 export const DISTRICTTOTALUKA = {
-  Ahmedabad: ["Dholka", "Daskroi"],
-  Surat: ["Nandigram", "Bardoli"],
-  Gandhinagar: ["Kalol", "Kadi"],
-  Baroda: ["Dabhoi", "Vasad"],
+  Ahmedabad: ["Ahmedabad", "Ambli", "Bagodara", "Bamsara", "Chaloda"],
+  Anand: ["Amrol", "Anand", "Bhalej", "Daheda", "Chikhodra"],
+  Navsari: ["Navsari", "Chhapra", "Amalsad", "Asna", "Bilimora"],
   Bangalore: [
-    "Adugodi",
-    "Banashankari",
-    "Basavanagudi",
-    "Bommanahalli",
+    "Bangalore",
+    "Bannerghatta",
     "Chickpet",
-    "Electronic City",
-    "HSR Layout",
-    "Indiranagar",
-    "Jayanagar",
-    "Malleswaram",
+    "Devasandra",
+    "Electronics City",
   ],
-  Mysore: [
-    "Bannimantap",
-    "Nazarbad",
-    "Kuvempunagar",
-    "Gokulam",
-    "Saraswathipuram",
-    "Yadavagiri",
-    "Siddarthanagar",
-    "Vivekanandanagar",
-    "Jayalakshmipuram",
-    "Kesare",
-  ],
-  Hassan: [
-    "Alur",
-    "Arakalagudu",
-    "Belur",
-    "Channarayapatna",
-    "Hassan",
-    "Hiriyur",
-    "Holenarsipur",
-    "K.R.Pet",
-    "Sakleshpur",
-    "Santhigiri",
-  ],
+  Mysore: ["Anandur", "Badanavalu", "Chikkanerale", "Mysore", "Mundur"],
+  Hassan: ["Adagur", "Anekannambadi", "Basavanahalli", "Chilkur", "Hassan"],
+};
+
+export const cityWisePincode = {
+  Bangalore: 560001,
+  Bannerghatta: 560083,
+  Chickpet: 560053,
+  Devasandra: 560036,
+  "Electronics City": 560100,
+  Adagur: 573121,
+  Anekannambadi: 573210,
+  Basavanahalli: 573136,
+  Chilkur: 573216,
+  Hassan: 573201,
+  Anandur: 571130,
+  Badanavalu: 571312,
+  Chikkanerale: 571102,
+  Mysore: 570001,
+  Mundur: 571604,
+  Ahmedabad: 380001,
+  Ambli: 382463,
+  Bagodara: 382230,
+  Bamsara: 382240,
+  Chaloda: 382260,
+  Amrol: 388307,
+  Anand: 388001,
+  Bhalej: 388205,
+  Daheda: 388620,
+  Chikhodra: 388320,
+  Navsari: 396445,
+  Chhapra: 396445,
+  Amalsad: 396310,
+  Asna: 396415,
+  Bilimora: 396321,
 };
 
 export const token =

@@ -40,7 +40,7 @@ const LoginPage = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 1000);
   }, []);
 
   const handleSubmit = (e) => {

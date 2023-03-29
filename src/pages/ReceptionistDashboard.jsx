@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../component/Navbar";
 import {
+  cityWisePincode,
   getTodaysDateInYYYYMMDDFormatSeperateByhyphen as today,
   removeToken,
 } from "../utils/utility";
@@ -8,7 +9,7 @@ import { baseURL } from "../constans";
 import { useLocation } from "react-router-dom";
 import CustomizedSnackbars from "../component/SnackBar";
 import { STATES, DISTRICTTOTALUKA, STATETODISTRICT } from "../utils/utility";
-import PatientDetailDialog from "../component/PatietnDetailDialog";
+import PatientDetailDialog from "../component/PatietnDetailModal";
 
 const successSnack = {
   state: true,
@@ -36,7 +37,7 @@ const ReceptionistDashboard = () => {
   const [healthID, setHealthID] = useState("");
   const [timeStamp, setTimeStamp] = useState("");
   const [address, setAddress] = useState("");
-  const [pincode, setPincode] = useState("");
+  // const [pincode, setPincode] = useState("");
   const [contactNo, setContactNo] = useState("");
   const [doctor, setDoctor] = useState("");
   const [state, setState] = useState("");
@@ -66,7 +67,7 @@ const ReceptionistDashboard = () => {
   const clearTheForm = () => {
     setHealthID("");
     setAddress("");
-    setPincode("");
+    // setPincode("");
     setContactNo("");
     setState("");
     setDistrict("");
@@ -107,7 +108,16 @@ const ReceptionistDashboard = () => {
       })
       .then((data) => {
         console.log(data);
-        setCitizen(data[0]);
+        setCitizen({
+          ...data[0],
+          state,
+          district,
+          city,
+          street1: address,
+          pincode: cityWisePincode[city],
+          mobileNo: contactNo,
+        });
+
         setShowDialog(true);
       })
       .catch((e) => {
@@ -126,7 +136,7 @@ const ReceptionistDashboard = () => {
     obj["state"] = state;
     obj["district"] = district;
     obj["mobileNo"] = contactNo;
-    obj["pincode"] = pincode;
+    obj["pincode"] = cityWisePincode[city];
     obj["doctor"] = { loginId: doctor };
 
     const healthRecord = JSON.stringify(obj);
@@ -159,9 +169,9 @@ const ReceptionistDashboard = () => {
       });
   };
 
-  const handlePinCodeChange = (e) => {
-    setPincode(e.target.value);
-  };
+  // const handlePinCodeChange = (e) => {
+  //   setPincode(e.target.value);
+  // };
 
   return (
     <div className="reception" style={{ position: "relative" }}>
@@ -369,7 +379,7 @@ const ReceptionistDashboard = () => {
             />
           </div>
           {/* pincode */}
-          <div className="form-item">
+          {/* <div className="form-item">
             <label htmlFor="pincode" style={{ fontSize: "20px" }}>
               Pincode :{" "}
             </label>
@@ -388,7 +398,7 @@ const ReceptionistDashboard = () => {
               value={pincode}
               required
             />
-          </div>
+          </div> */}
 
           {/* contact No */}
           <div className="form-item">
