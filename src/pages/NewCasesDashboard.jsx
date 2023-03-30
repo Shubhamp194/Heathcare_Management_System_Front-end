@@ -12,9 +12,9 @@ const NewCasesDashboard = () => {
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // call api to fetch patients data
-  }, []);
+  // useEffect(() => {
+  //   // call api to fetch patients data
+  // }, []);
 
   const navigate = useNavigate();
 

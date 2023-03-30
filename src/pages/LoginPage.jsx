@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { baseURL } from "../constans";
 import routes from "../Router/routes";
-import { removeToken, token } from "../utils/utility";
+import { removeToken } from "../utils/utility";
 
 const LoginForm = styled("form")(({ theme }) => ({
   backgroundColor: "#FAFAFA",
@@ -77,7 +77,7 @@ const LoginPage = () => {
         } else if (role === "DOC") {
           navigate(routes.DoctorDashboard, { replace: true });
         } else {
-          // navigate(routes.SupervisorDashboard)
+          navigate(routes.SupervisorDashboard, { replace: true });
         }
       })
       .catch((e) => {

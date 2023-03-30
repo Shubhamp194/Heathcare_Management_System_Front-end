@@ -8,6 +8,8 @@ import ReceptionistDashboard from "../pages/ReceptionistDashboard";
 import DoctorDashboard from "../pages/DoctorsDashboard";
 import NewCasesDashboard from "../pages/NewCasesDashboard";
 import PatientHealthRecordForm from "../pages/PatientHealthRecordForm";
+import SupervisorDashboard from "../pages/SupervisorDashboard";
+import FHWAssignmentPage from "../pages/FHWAssignmentPage";
 
 const AppRouter = () => {
   return (
@@ -25,13 +27,11 @@ const AppRouter = () => {
           path={routes.HealthRecord}
           element={<PatientHealthRecordForm />}
         />
-
-        {/* //temorary route */}
-        {/*<Route
-          path="/newcase"
-          element={<PatientHealthRecordForm state={state2} />}
-        />*/}
-
+        <Route
+          path={routes.SupervisorDashboard}
+          element={<SupervisorDashboard />}
+        />
+        <Route path={routes.AssignFWH} element={<FHWAssignmentPage />} />
         <Route path="*" element={<LandingPage />} />
       </Routes>
     </Router>
