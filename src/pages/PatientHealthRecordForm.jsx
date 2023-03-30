@@ -59,7 +59,6 @@ const PatientHealthRecordForm = () => {
       })
       .then((data) => {
         if (data[0].length > 0) setPastHealthRec(data[0]);
-        console.log(data);
       })
       .catch((e) => console.error(e));
   };

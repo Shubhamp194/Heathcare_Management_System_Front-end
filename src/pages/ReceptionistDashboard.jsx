@@ -107,7 +107,7 @@ const ReceptionistDashboard = () => {
         throw res;
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setCitizen({
           ...data[0],
           state,

@@ -3,9 +3,9 @@ import React from "react";
 const HRCard = ({ hr, modalHandler }) => {
   const { conclusion: symptoms, treatment, creationDate } = hr;
 
-  const handleShowHR = () => {
-    console.log("haha");
-  };
+  // const handleShowHR = () => {
+  //   console.log("haha");
+  // };
 
   return (
     <div
