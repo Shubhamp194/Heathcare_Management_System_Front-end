@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { UserContext } from "../contexts/UserContext";
 import { baseURL } from "../constans";
@@ -135,13 +135,7 @@ const LoginPage = () => {
         >
           Login
         </Button>
-        <Link
-          style={{ marginLeft: "23%", marginTop: "5%" }}
-          to={routes.ForgotPassword}
-        >
-          Forgot Password?
-        </Link>
-        {/*<p
+        <p
           style={{
             textUnderlinePosition: "under",
             cursor: "pointer",
@@ -155,7 +149,7 @@ const LoginPage = () => {
         >
           <u> Forgot Password ?</u>
         </p>
-         <div className="form-item">
+        {/* <div className="form-item">
           <label htmlFor="Username">Username</label>
           <input
             variant="standard"
