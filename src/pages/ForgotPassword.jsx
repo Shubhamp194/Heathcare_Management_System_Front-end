@@ -3,111 +3,6 @@ import routes from "../Router/routes";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../constans";
 
-const GetOTPCard = ({ setStage, setState }) => {
-  //   return;
-  const [username, setUsername] = useState("");
-
-  return (
-    <div
-      className="otpCardContainer"
-      style={{
-        width: "30vw",
-        height: "45vh",
-        backgroundColor: "white",
-        borderRadius: "10px",
-        boxShadow: "1px 1px 3px 1px rgba(0,0,0,0.5)",
-
-        display: "flex",
-        flexWrap: "wrap",
-        alignContent: "center",
-        justifyContent: "center",
-      }}
-    >
-      <span
-        style={{
-          display: "block",
-          fontSize: "25px",
-          textAlign: "center",
-          fontWeight: "bold",
-          marginBottom: "50px",
-        }}
-      >
-        Forgot Password
-      </span>
-      <form onSubmit={(e) => e.preventDefault()} style={{}}>
-        <input
-          type="text"
-          placeholder="Enter username"
-          required
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <button
-          onClick={(e) => setStage(2)}
-          style={{
-            marginLeft: "25%",
-            marginTop: "10%",
-            width: "50%",
-            padding: "5%",
-            display: "block",
-            borderRadius: "15px",
-            border: "1px solid",
-            cursor: "pointer",
-          }}
-        >
-          Get OTP
-        </button>
-      </form>
-    </div>
-  );
-};
-
-const ResetPasswordScreen = ({ setStage, setState }) => {
-  const [username, setUsername] = useState("");
-
-  return (
-    <div
-      className="resetCardContainer"
-      style={{
-        width: "30vw",
-        height: "45vh",
-        backgroundColor: "white",
-        borderRadius: "10px",
-        boxShadow: "1px 1px 3px 1px rgba(0,0,0,0.5)",
-        display: "flex",
-        flexWrap: "wrap",
-        alignContent: "center",
-        justifyContent: "center",
-      }}
-    >
-      <form onSubmit={(e) => e.preventDefault()} style={{}}>
-        <input
-          type="text"
-          placeholder="New Password"
-          required
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <button
-          onClick={(e) => setStage(2)}
-          style={{
-            marginLeft: "25%",
-            marginTop: "10%",
-            width: "50%",
-            padding: "5%",
-            display: "block",
-            borderRadius: "15px",
-            border: "1px solid",
-            cursor: "pointer",
-          }}
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  );
-};
-
 const ForgotPassword = () => {
   const navigate = useNavigate();
 
@@ -175,7 +70,7 @@ const ForgotPassword = () => {
       .then((res) => {
         if (res.status === 200) {
           localStorage.removeItem("secret");
-          navigate(routes.LoginPage, { replace: "true" });
+          navigate(routes.LoginPage, { replace: true });
         }
         throw res;
       })
@@ -247,6 +142,21 @@ const ForgotPassword = () => {
               }}
             >
               Get OTP
+            </button>
+            <button
+              style={{
+                marginLeft: "37%",
+                marginTop: "5%",
+                width: "25%",
+                padding: "2%",
+                display: "block",
+                borderRadius: "15px",
+                border: "1px solid",
+                cursor: "pointer",
+              }}
+              onClick={(e) => navigate(routes.LoginPage, { replace: true })}
+            >
+              back
             </button>
           </form>
         </div>
