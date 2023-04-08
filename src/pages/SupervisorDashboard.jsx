@@ -27,26 +27,6 @@ const Container = styled("div")(({ theme }) => ({
   margin: "30vh 0vw ",
 }));
 
-/*
-const DoctorDashboard = () => {
-  const navigate = useNavigate();
-
-  const gotoOPD = () => {
-    navigate(routes.OPD);
-  };
-  const navigateToFollowUps = () => {};
-
-  return (
-    <>
-      <NavBar showBackButton={false} />
-      <Container>
-        <Card onClick={gotoOPD}>OPD</Card>
-        <Card onClick={navigateToFollowUps}>Past follow up</Card>
-      </Container>
-    </>
-  );
-};
-*/
 const SupervisorDashboard = () => {
   const navigation = useNavigate();
 
@@ -60,6 +40,9 @@ const SupervisorDashboard = () => {
           }}
         >
           <div style={{}}>FHW Assignment</div>
+        </Card>
+        <Card onClick={(e) => navigation(routes.ReassignPatient)}>
+          <div>Reassign Patients</div>
         </Card>
         <Card onClick={(e) => {}}>
           <div>FHW Management</div>

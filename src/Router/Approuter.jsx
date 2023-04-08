@@ -11,6 +11,7 @@ import PatientHealthRecordForm from "../pages/PatientHealthRecordForm";
 import SupervisorDashboard from "../pages/SupervisorDashboard";
 import FHWAssignmentPage from "../pages/FHWAssignmentPage";
 import ForgotPassword from "../pages/ForgotPassword";
+import PatientReassignmentPage from "../pages/PatientReassignPage";
 
 const AppRouter = () => {
   return (
@@ -34,6 +35,10 @@ const AppRouter = () => {
         />
         <Route path={routes.AssignFWH} element={<FHWAssignmentPage />} />
         <Route path={routes.ForgotPassword} element={<ForgotPassword />} />
+        <Route
+          path={routes.ReassignPatient}
+          element={<PatientReassignmentPage />}
+        />
         <Route path="*" element={<LandingPage />} />
       </Routes>
     </Router>

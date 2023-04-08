@@ -5,8 +5,8 @@ const roles = [
 ];
 
 const oneDayInMillis = 86400000;
-const baseURL = "http://172.16.201.120:8081";
-// const baseURL = "http://172.16.133.196:8081";
+// const baseURL = "http://172.16.201.120:8081";
+const baseURL = "http://172.16.133.196:8081";
 // const alphNumRegEsx = new RegExp("^w+$");
 
 export { oneDayInMillis, roles, baseURL };

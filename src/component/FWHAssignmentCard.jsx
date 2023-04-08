@@ -43,7 +43,13 @@ const FHWAssignmentCard = ({ fhws, patient, handleAssignFHW }) => {
               const { citizen } = f;
               return (
                 <option key={id} value={f["loginId"]}>
-                  {citizen["fname"] + " " + citizen["lname"]}
+                  {citizen["fname"] +
+                    " " +
+                    citizen["lname"] +
+                    " - " +
+                    "serving " +
+                    f["citizenAssigned"] +
+                    " patients"}
                 </option>
               );
             })

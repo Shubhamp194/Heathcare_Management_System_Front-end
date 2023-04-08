@@ -13,12 +13,28 @@ const ForgotPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleGetOTP = (id) => {
+    if (
+      !(
+        id.substr(0, 3) === "SUP" ||
+        id.substr(0, 3) === "REC" ||
+        id.substr(0, 3) === "DOC"
+      )
+    ) {
+      alert("Invalid Username");
+      return;
+    }
+
     fetch(baseURL + "/blackbox/getOtp?loginId=" + id, {
       method: "GET",
     })
       .then((res) => {
         if (res.status === 200) {
           setStage(2);
+          return;
+        }
+        if (res.status === 404) {
+          alert("Invalid username");
+          setUsername("");
           return;
         }
         throw res;
@@ -41,17 +57,21 @@ const ForgotPassword = () => {
               "secret",
               res.headers.get("secret").toString()
             );
-          setStage(3);
-          return;
-        }
 
-        if (res.status === 401) {
-          alert("invalid otp");
-          setStage(1);
-          return;
+          return res.json();
         }
 
         throw res;
+      })
+      .then((data) => {
+        if (data === 1) {
+          alert("Invalid OTP");
+        } else if (data === 2) {
+          alert("OTP expired");
+          setStage(1);
+        } else {
+          setStage(3);
+        }
       })
       .catch((e) => console.error(e));
   };
@@ -150,7 +170,7 @@ const ForgotPassword = () => {
                 width: "25%",
                 padding: "2%",
                 display: "block",
-                borderRadius: "15px",
+                borderRadius: "10px",
                 border: "1px solid",
                 cursor: "pointer",
               }}

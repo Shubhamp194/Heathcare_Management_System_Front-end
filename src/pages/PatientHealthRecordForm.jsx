@@ -65,7 +65,7 @@ const PatientHealthRecordForm = () => {
 
   const handleHRModal = (hr) => {
     setHealthRec(hr);
-    setShowHRModal(true);
+    // setShowHRModal(true);
   };
 
   const handleSubmit = (e) => {
