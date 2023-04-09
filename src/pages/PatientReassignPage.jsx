@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavBar from "../component/Navbar";
-import { Button, List, ListItem } from "@mui/material";
+import { List, ListItem } from "@mui/material";
 import { baseURL } from "../constans";
+import PatientReassignModal from "../component/PatientReassignModal";
 
-const FHWCard = ({ fhw, cnt }) => {
+const FHWCard = ({ fhw, cnt, handler }) => {
   return (
     <ListItem
       style={{
@@ -29,6 +30,8 @@ const FHWCard = ({ fhw, cnt }) => {
             border: "1px solid",
             cursor: "pointer",
           }}
+          onClick={handler}
+          disabled={cnt === 0}
         >
           Reassign
         </button>
@@ -39,11 +42,91 @@ const FHWCard = ({ fhw, cnt }) => {
 
 const PatientReassignmentPage = () => {
   const [fhws, setFhws] = useState([]);
+
+  const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [modalObj, setModalObj] = useState({});
+  const [reload, setReload] = useState(false);
 
   const { user } = useContext(UserContext);
 
-  const handlePatientReassign = (patients, fhws, fhw) => {};
+  const assignPatientToFHW = (id, list, currentFHW, newList) => {
+    let tmp = fhws;
+
+    for (let i = 0; i < tmp.length; i++) {
+      if (tmp[i]["fieldHealthWorker"]["loginId"] === id) {
+        // console.log(tmp[i]["citizens"]);
+        tmp[i]["citizens"] = tmp[i]["citizens"].concat(list);
+        // console.log(tmp[i]["citizens"]);
+        break;
+      }
+    }
+
+    for (let i = 0; i < tmp.length; i++) {
+      if (tmp[i]["fieldHealthWorker"]["loginId"] === currentFHW) {
+        tmp[i]["citizens"] = newList;
+        break;
+      }
+    }
+
+    setFhws(tmp);
+  };
+
+  const handleSubmit = (
+    currentFHW,
+    selectedFHW,
+    selectedPatients,
+    patients
+  ) => {
+    setShowModal(false);
+    const data = { citizens: [], fieldHealthWorker: {} };
+    data["fieldHealthWorker"]["loginId"] = selectedFHW;
+
+    selectedPatients.forEach((p) => {
+      data["citizens"].push({ uhId: p });
+    });
+
+    let patientList = [];
+    let newPatientList = [];
+    patients.forEach((p) => {
+      if (selectedPatients.indexOf(String(p["uhId"])) !== -1)
+        patientList.push(p);
+      else newPatientList.push(p);
+    });
+
+    const options = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          localStorage.getItem("token") &&
+          localStorage.getItem("token").toString(),
+      },
+    };
+
+    fetch(baseURL + "/supervisor/reassign", options)
+      .then((res) => {
+        if (res.status === 200) return res.json();
+        throw res;
+      })
+      .then((response) => {
+        assignPatientToFHW(
+          selectedFHW,
+          patientList,
+          currentFHW,
+          newPatientList
+        );
+        setReload(!reload);
+      })
+      .catch((e) => console.error(e))
+      .finally(() => {});
+  };
+
+  const handlePatientReassign = (patients, options, fhw) => {
+    setModalObj({ patients, options, fhw, fhws, setFhws, handleSubmit });
+    setShowModal(true);
+  };
 
   useEffect(() => {
     fetch(baseURL + "/supervisor/getFhws?loginId=" + user["loginId"], {
@@ -69,7 +152,22 @@ const PatientReassignmentPage = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
+      {showModal && (
+        <div
+          style={{
+            zIndex: 2,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            backgroundColor: "rgba(0,0,0,0.5)",
+          }}
+        >
+          <PatientReassignModal data={modalObj} setShowModal={setShowModal} />
+        </div>
+      )}
       <NavBar showBackButton={true} />
       <h1 style={{ textAlign: "center" }}>List of health workers</h1>
       <List
@@ -92,7 +190,7 @@ const PatientReassignmentPage = () => {
               <FHWCard
                 key={citizen["uhId"]}
                 fhw={citizen}
-                cnt={obj["fieldHealthWorker"]["citizenAssigned"]}
+                cnt={obj["citizens"].length}
                 handler={(e) =>
                   handlePatientReassign(
                     obj["citizens"],
@@ -105,7 +203,7 @@ const PatientReassignmentPage = () => {
           })
         ) : (
           <h2 style={{ marginTop: "25vh" }}>
-            No patient in the queue at this moment.
+            No Health Worker under your supervision
           </h2>
         )}
       </List>

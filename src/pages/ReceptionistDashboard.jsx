@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 import CustomizedSnackbars from "../component/SnackBar";
 import { STATES, DISTRICTTOTALUKA, STATETODISTRICT } from "../utils/utility";
 import PatientDetailDialog from "../component/PatietnDetailModal";
+import { encryptString, decryptString } from "../utils/encrypt_decrypt";
 
 const successSnack = {
   state: true,
@@ -107,7 +108,8 @@ const ReceptionistDashboard = () => {
         throw res;
       })
       .then((data) => {
-        // console.log(data);
+        // data = JSON.parse(decryptString(data));
+
         setCitizen({
           ...data[0],
           state,

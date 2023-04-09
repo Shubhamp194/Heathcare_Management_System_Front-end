@@ -6,6 +6,7 @@ import { UserContext } from "../contexts/UserContext";
 import { baseURL } from "../constans";
 import routes from "../Router/routes";
 import { removeToken } from "../utils/utility";
+import { encryptString, decryptString } from "../utils/encrypt_decrypt";
 
 const LoginForm = styled("form")(({ theme }) => ({
   backgroundColor: "#FAFAFA",
@@ -45,6 +46,7 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // encryptString(
     const obj = JSON.stringify({ loginId: userName, password });
 
     fetch(baseURL + "/common/login", {
@@ -61,6 +63,8 @@ const LoginPage = () => {
         throw res;
       })
       .then((data) => {
+        // data = JSON.parse(decryptString(data));
+        // console.log(data);
         let _user = data[0];
         let { loginId: role } = data[0];
         role = role.substring(0, 3);

@@ -22,6 +22,7 @@ const NavBar = ({ showBackButton = false }) => {
         position: "sticky",
         top: "0px",
         left: "0px",
+        zIndex: 1,
       }}
     >
       <ul style={buttonStyle}>
