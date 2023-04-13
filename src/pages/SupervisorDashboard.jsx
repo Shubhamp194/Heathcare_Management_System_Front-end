@@ -44,8 +44,8 @@ const SupervisorDashboard = () => {
         <Card onClick={(e) => navigation(routes.ReassignPatient)}>
           <div>Reassign Patients</div>
         </Card>
-        <Card onClick={(e) => {}}>
-          <div>FHW Management</div>
+        <Card onClick={(e) => navigation(routes.FHWAnalytics)}>
+          <div>FHW Analytics</div>
         </Card>
       </Container>
     </>

@@ -12,6 +12,9 @@ import SupervisorDashboard from "../pages/SupervisorDashboard";
 import FHWAssignmentPage from "../pages/FHWAssignmentPage";
 import ForgotPassword from "../pages/ForgotPassword";
 import PatientReassignmentPage from "../pages/PatientReassignPage";
+import FHWAnalyticsPage from "../pages/FHWAnalyticsPage";
+import FHWInfoPage from "../pages/FHWInfoPage";
+import PieChart from "../component/PieChart";
 
 const AppRouter = () => {
   return (
@@ -39,6 +42,8 @@ const AppRouter = () => {
           path={routes.ReassignPatient}
           element={<PatientReassignmentPage />}
         />
+        <Route path={routes.FHWAnalytics} element={<FHWAnalyticsPage />} />
+        <Route path={routes.FHWInfo} element={<FHWInfoPage />} />
         <Route path="*" element={<LandingPage />} />
       </Routes>
     </Router>
