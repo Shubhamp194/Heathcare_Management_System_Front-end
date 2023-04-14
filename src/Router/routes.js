@@ -11,5 +11,6 @@ const routes = Object.freeze({
   ReassignPatient: "/reassignPatient",
   FHWAnalytics: "/fhw_analytics",
   FHWInfo: "/fhw_info",
+  ProfilePage: "/profile",
 });
 export default routes;

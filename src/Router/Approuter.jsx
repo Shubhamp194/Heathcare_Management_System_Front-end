@@ -15,6 +15,7 @@ import PatientReassignmentPage from "../pages/PatientReassignPage";
 import FHWAnalyticsPage from "../pages/FHWAnalyticsPage";
 import FHWInfoPage from "../pages/FHWInfoPage";
 import PieChart from "../component/PieChart";
+import ProfilePage from "../pages/ProfilePage";
 
 const AppRouter = () => {
   return (
@@ -44,6 +45,7 @@ const AppRouter = () => {
         />
         <Route path={routes.FHWAnalytics} element={<FHWAnalyticsPage />} />
         <Route path={routes.FHWInfo} element={<FHWInfoPage />} />
+        <Route path={routes.ProfilePage} element={<ProfilePage />} />
         <Route path="*" element={<LandingPage />} />
       </Routes>
     </Router>

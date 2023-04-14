@@ -35,7 +35,7 @@ function FHWAnalyticsPage() {
   // }, []);
 
   const fhwList = data[0];
-  // const fhwList = dataFromApi[0];
+  // const fhwList = dataFromApi;
   let navigate = useNavigate();
 
   function handleClick(idx) {

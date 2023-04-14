@@ -14,6 +14,8 @@ const NavBar = ({ showBackButton = false }) => {
     justifyContent: showBackButton ? "space-between" : "end",
   };
 
+  // const btnStyle =
+
   return (
     <nav
       className="navbar"
@@ -46,6 +48,29 @@ const NavBar = ({ showBackButton = false }) => {
             back
           </div>
         )}
+
+        <div
+          style={{
+            display: "inline",
+            color: "black",
+            fontWeight: "bold",
+            fontSize: "1.25rem",
+            textDecoration: "none",
+            backgroundColor: "gray",
+            padding: "5px",
+            borderRadius: "5px",
+            cursor: "pointer",
+            marginRight: "2%",
+          }}
+          onClick={(e) => {
+            // if (navigate.length > 1) navigate(-1);
+            navigate(routes.ProfilePage, { replace: true });
+            // console.log("Profile button clicked");
+          }}
+        >
+          My Profile
+        </div>
+
         <div
           style={{
             display: "inline",
