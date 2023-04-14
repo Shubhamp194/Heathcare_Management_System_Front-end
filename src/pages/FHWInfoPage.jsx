@@ -159,6 +159,26 @@ function FHWInfoPage() {
     labels: ["FHW has zero assigned followps"],
   };
 
+  const emptyRemChartData = {
+    datasets: [
+      {
+        data: [1],
+      },
+    ],
+
+    labels: ["FHW has zero remaining followps"],
+  };
+
+  const emptyComChartData = {
+    datasets: [
+      {
+        data: [1],
+      },
+    ],
+
+    labels: ["FHW has zero completed followps"],
+  };
+
   return (
     <div className="textFeilds">
       <NavBar showBackButton={true} />
@@ -187,12 +207,28 @@ function FHWInfoPage() {
 
       <div className="charts">
         <div className="chart" style={chartStyle1}>
-          <PieChart chartData={total > 0 ? chartData1 : emptyChartData} />
+          <PieChart
+            chartData={
+              total > 0
+                ? completed === 0
+                  ? emptyComChartData
+                  : chartData1
+                : emptyChartData
+            }
+          />
           <p style={{ textAlign: "center" }}> Completed Follow ups</p>
         </div>
 
         <div className="chart" style={chartStyle2}>
-          <PieChart chartData={total > 0 ? chartData2 : emptyChartData} />
+          <PieChart
+            chartData={
+              total > 0
+                ? upcoming + backlog === 0
+                  ? emptyRemChartData
+                  : chartData2
+                : emptyChartData
+            }
+          />
           <p style={{ textAlign: "center" }}> Remaining Follow ups</p>
         </div>
         <div className="chart" style={chartStyle3}>
