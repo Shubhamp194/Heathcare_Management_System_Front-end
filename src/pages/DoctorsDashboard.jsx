@@ -33,7 +33,9 @@ const DoctorDashboard = () => {
   const gotoOPD = () => {
     navigate(routes.OPD);
   };
-  const navigateToFollowUps = () => {};
+  const navigateToFollowUps = () => {
+    navigate(routes.PastPatientHR);
+  };
 
   return (
     <>

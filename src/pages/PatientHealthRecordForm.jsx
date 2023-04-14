@@ -76,6 +76,7 @@ const PatientHealthRecordForm = () => {
     patientData["prescription"] = prescription;
     patientData["treatment"] = treatemet;
     patientData["followUps"] = followUps;
+    patientData["citizen"] = { uhId: patientData["citizen"]["uhId"] };
 
     let healthRec = JSON.stringify(patientData);
 
