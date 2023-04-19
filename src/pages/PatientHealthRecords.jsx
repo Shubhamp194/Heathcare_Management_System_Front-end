@@ -3,14 +3,31 @@ import { useLocation } from "react-router-dom";
 import NavBar from "../component/Navbar";
 import CardButton from "../component/CardButton";
 import CardContent from "../component/CardContent";
+import PaginatedDataContainer from "../component/RecordedFollowUpModal";
 
 const PatientHealthRecords = () => {
   const { state } = useLocation();
 
   const [hrs, setHRs] = useState(state["hrs"]);
+  const [showModal, setShowModal] = useState(false);
   console.log(state);
   return (
-    <div>
+    <div style={{ position: "relative" }}>
+      {showModal && (
+        <div
+          style={{
+            backgroundColor: "rgba(0,0,0,0.5)",
+            zIndex: "2",
+            position: "fixed",
+            left: "0",
+            top: "0",
+            bottom: 0,
+            right: 0,
+          }}
+        >
+          <PaginatedDataContainer handler={setShowModal} />
+        </div>
+      )}
       <NavBar showBackButton={true} />
       <h2 style={{ textAlign: "center" }}>
         {hrs[0]["citizen"]["fname"] +
@@ -74,7 +91,7 @@ const PatientHealthRecords = () => {
               </div>
 
               <CardButton
-                onClick={(e) => console.log("d")}
+                onClick={(e) => setShowModal(true)}
                 disabled={followUps.length === 0}
               >
                 show followups
