@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Pagination from "@mui/material/Pagination";
+import CardContent from "./CardContent";
+import { vitals } from "../utils/utility";
+import _ from "lodash";
 
 const PaginatedDataContainer = ({ data, handler }) => {
+  const [followup, setFollowUp] = useState(data[0]);
+
   const handlePageChange = (e, page) => {
-    alert(page);
+    setFollowUp(data[page - 1]);
   };
 
   return (
@@ -49,30 +54,63 @@ const PaginatedDataContainer = ({ data, handler }) => {
             overflowY: "auto",
           }}
         >
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
-          <p>blah</p>
+          <div style={{ padding: "10px" }}>
+            <CardContent
+              data={new Date(followup["dateOfFollowUp"]).toLocaleDateString()}
+              label={"Date Of FollowUp"}
+            />
+            <CardContent
+              data={
+                followup["instruction"] === null
+                  ? "NA"
+                  : followup["instruction"]
+              }
+              label={"Instruction"}
+            />
+            {followup["status"] === 0 ? (
+              <h3 style={{ textAlign: "center", marginTop: "15%" }}>
+                Follow up is yet to be done
+              </h3>
+            ) : (
+              <>
+                <CardContent
+                  data={
+                    followup["actualDateOfFollowUp"] === null
+                      ? "NA"
+                      : followup["actualDateOfFollowUp"]
+                  }
+                  label={"Actual date of filling"}
+                />
+
+                <CardContent
+                  data={
+                    followup["observation"] === null
+                      ? "NA"
+                      : followup["observation"]
+                  }
+                  label={"Health Worker's Observation"}
+                />
+                <h3>"Vitals Collected (if any)"</h3>
+                {vitals.map((v, id) => {
+                  return (
+                    followup[_.camelCase(v)] && (
+                      <CardContent
+                        key={id}
+                        data={followup[_.camelCase(v)]}
+                        label={v}
+                      />
+                    )
+                  );
+                })}
+              </>
+            )}
+          </div>
         </div>
         <Pagination
           variant="outlined"
           color="primary"
           style={{ margin: "20px 0" }}
-          count={2}
+          count={data.length}
           onChange={handlePageChange}
         />
       </div>

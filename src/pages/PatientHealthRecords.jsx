@@ -10,6 +10,8 @@ const PatientHealthRecords = () => {
 
   const [hrs, setHRs] = useState(state["hrs"]);
   const [showModal, setShowModal] = useState(false);
+  const [followups, setFollowUps] = useState([]);
+
   console.log(state);
   return (
     <div style={{ position: "relative" }}>
@@ -25,7 +27,7 @@ const PatientHealthRecords = () => {
             right: 0,
           }}
         >
-          <PaginatedDataContainer handler={setShowModal} />
+          <PaginatedDataContainer data={followups} handler={setShowModal} />
         </div>
       )}
       <NavBar showBackButton={true} />
@@ -91,7 +93,10 @@ const PatientHealthRecords = () => {
               </div>
 
               <CardButton
-                onClick={(e) => setShowModal(true)}
+                onClick={(e) => {
+                  setFollowUps(obj["followUps"]);
+                  setShowModal(true);
+                }}
                 disabled={followUps.length === 0}
               >
                 show followups
