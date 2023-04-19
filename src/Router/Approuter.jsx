@@ -13,6 +13,7 @@ import FHWAssignmentPage from "../pages/FHWAssignmentPage";
 import ForgotPassword from "../pages/ForgotPassword";
 import PatientReassignmentPage from "../pages/PatientReassignPage";
 import PastPatientHealthRecords from "../pages/PastPatientsHealthRecords";
+import PatientHealthRecords from "../pages/PatientHealthRecords";
 
 const AppRouter = () => {
   return (
@@ -36,6 +37,7 @@ const AppRouter = () => {
           path={routes.PastPatientHR}
           element={<PastPatientHealthRecords />}
         />
+        <Route path={routes.PatientHR} element={<PatientHealthRecords />} />
 
         <Route
           path={routes.SupervisorDashboard}

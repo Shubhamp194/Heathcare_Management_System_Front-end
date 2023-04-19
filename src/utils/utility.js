@@ -64,7 +64,8 @@ export const pastHR = [
     hrId: 603,
     creationDate: "2023-04-14",
     creationTime: "18:23:12",
-    conclusion: "symotoms",
+    conclusion:
+      "symotomssymotomssymotomssymotomssymotomssymotomssymotomssymotomssymotomssymotomssymotomssymotomssymotomssymotomssymotomssymotomssymotomssymotoms",
     treatment: "ddsdsd",
     prescription: "dsdsdsd",
     citizen: {

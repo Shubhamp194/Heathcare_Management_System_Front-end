@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../component/Navbar";
 import { pastHR as data } from "../utils/utility";
 import PatientCard from "../component/PatientCard";
+import { useNavigate } from "react-router-dom";
+import routes from "../Router/routes";
 
 const PastPatientHealthRecords = () => {
-  const patients = new Object();
-  const patientHR = new Object();
+  const patients = {};
+  const patientHR = {};
 
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [loading, setLoading] = useState(true);
-  const [patientList, setPatientList] = useState(new Object());
-  const [healthRecords, setHealthRecords] = useState(new Object());
+  const [patientList, setPatientList] = useState({});
+  const [healthRecords, setHealthRecords] = useState({});
 
   const prepare = (_data) => {
     _data.forEach((obj) => {
@@ -23,12 +26,17 @@ const PastPatientHealthRecords = () => {
       hrs.push(obj);
       patientHR[citizen["uhId"]] = hrs;
     });
+    setPatientList(patients);
+    setHealthRecords(patientHR);
+  };
+
+  const handleShowRecords = (hrs) => {
+    // console.log(hrs);
+    navigate(routes.PatientHR, { state: { hrs } });
   };
 
   useEffect(() => {
     prepare(data);
-    setPatientList(patients);
-    // setHealthRecords(patientHR);
     setLoading(false);
   }, []);
 
@@ -119,7 +127,7 @@ const PastPatientHealthRecords = () => {
                     name={fname + " " + lname}
                     gender={gender}
                     buttonName="show records"
-                    handler={(e) => alert("bingo")}
+                    handler={(e) => handleShowRecords(healthRecords[uhId])}
                   />
                 </div>
               );
