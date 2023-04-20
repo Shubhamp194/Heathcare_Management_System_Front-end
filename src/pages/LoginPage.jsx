@@ -63,12 +63,12 @@ const LoginPage = () => {
       })
       .then((data) => {
         // data = JSON.parse(decryptString(data));
-        // console.log(data);
+
         let _user = data[0];
         let { loginId: role } = data[0];
         role = role.substring(0, 3);
         let doctors = role === "REC" ? data[1] : [];
-        console.log(_user);
+
         setUser(_user);
 
         if (role === "REC") {

@@ -12,7 +12,6 @@ const PatientHealthRecords = () => {
   const [showModal, setShowModal] = useState(false);
   const [followups, setFollowUps] = useState([]);
 
-  console.log(state);
   return (
     <div style={{ position: "relative" }}>
       {showModal && (

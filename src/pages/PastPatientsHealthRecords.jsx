@@ -31,7 +31,6 @@ const PastPatientHealthRecords = () => {
   };
 
   const handleShowRecords = (hrs) => {
-    // console.log(hrs);
     navigate(routes.PatientHR, { state: { hrs } });
   };
 

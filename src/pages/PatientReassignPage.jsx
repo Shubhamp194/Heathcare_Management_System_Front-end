@@ -55,9 +55,8 @@ const PatientReassignmentPage = () => {
 
     for (let i = 0; i < tmp.length; i++) {
       if (tmp[i]["fieldHealthWorker"]["loginId"] === id) {
-        // console.log(tmp[i]["citizens"]);
         tmp[i]["citizens"] = tmp[i]["citizens"].concat(list);
-        // console.log(tmp[i]["citizens"]);
+
         break;
       }
     }
