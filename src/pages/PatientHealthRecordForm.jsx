@@ -5,7 +5,7 @@ import FollowUpModal from "../component/FollowUpModal";
 import HRCard from "../component/HealthRecordCard";
 import HealthRecordModal from "../component/HealthRecordModal";
 import PatientCard from "../component/PatientCard";
-import { baseURL } from "../constans";
+import { baseURL, endPoints } from "../constans";
 import routes from "../Router/routes";
 import { calculate_age, removeToken } from "../utils/utility";
 
@@ -45,7 +45,7 @@ const PatientHealthRecordForm = () => {
   };
 
   const fetchPastHR = () => {
-    fetch(baseURL + "/doctor/getConsentData?uhId=" + citizenData.uhId, {
+    fetch(baseURL + endPoints["DOCTOR_GET_CONSENTED_DATA"] + citizenData.uhId, {
       method: "GET",
       headers: {
         Authorization:
@@ -80,7 +80,7 @@ const PatientHealthRecordForm = () => {
 
     let healthRec = JSON.stringify(patientData);
 
-    fetch(baseURL + "/doctor/submitHealthRecord", {
+    fetch(baseURL + endPoints["DOCTOR_SUBMIT_HR"], {
       body: healthRec,
       method: "POST",
       headers: {

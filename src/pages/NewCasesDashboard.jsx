@@ -3,7 +3,7 @@ import NavBar from "../component/Navbar";
 import { List } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import routes from "../Router/routes";
-import { baseURL } from "../constans";
+import { baseURL, endPoints } from "../constans";
 import PatientCard from "../component/PatientCard";
 import { UserContext } from "../contexts/UserContext";
 import { removeToken } from "../utils/utility";
@@ -27,7 +27,7 @@ const NewCasesDashboard = () => {
   };
 
   useEffect(() => {
-    fetch(baseURL + "/doctor/getNewHealthRecords?loginId=" + user.loginId, {
+    fetch(baseURL + endPoints["DOCTOR_OPD_CASES"] + user.loginId, {
       method: "GET",
       headers: {
         Authorization:

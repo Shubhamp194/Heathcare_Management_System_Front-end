@@ -3,10 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import { baseURL } from "../constans";
+import { baseURL, endPoints } from "../constans";
 import routes from "../Router/routes";
 import { removeToken } from "../utils/utility";
-import { encryptString, decryptString } from "../utils/encrypt_decrypt";
 
 const LoginForm = styled("form")(({ theme }) => ({
   backgroundColor: "#FAFAFA",
@@ -49,7 +48,7 @@ const LoginPage = () => {
     // encryptString(
     const obj = JSON.stringify({ loginId: userName, password });
 
-    fetch(baseURL + "/common/login", {
+    fetch(baseURL + endPoints["LOGIN"], {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: obj,
