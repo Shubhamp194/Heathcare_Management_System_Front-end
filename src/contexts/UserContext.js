@@ -1,12 +1,13 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 const UserContext = createContext({});
 
 const UserContextProvider = ({ children }) => {
-  //   const [userId, setUserId] = useState("");
-  //   const [userName, setUserName] = useState("");
   const [user, setUser] = useState(null);
-  //   const [hospitalId, setHospitalId] = useState("")
+
+  useEffect(() => {
+    setUser(localStorage.getItem("user"));
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

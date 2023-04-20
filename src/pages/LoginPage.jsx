@@ -45,7 +45,6 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // encryptString(
     const obj = JSON.stringify({ loginId: userName, password });
 
     fetch(baseURL + endPoints["LOGIN"], {
@@ -62,13 +61,12 @@ const LoginPage = () => {
         throw res;
       })
       .then((data) => {
-        // data = JSON.parse(decryptString(data));
-
         let _user = data[0];
         let { loginId: role } = data[0];
         role = role.substring(0, 3);
         let doctors = role === "REC" ? data[1] : [];
 
+        localStorage.setItem("user", _user);
         setUser(_user);
 
         if (role === "REC") {
@@ -99,7 +97,6 @@ const LoginPage = () => {
     <div>{"loading..."}</div>
   ) : (
     <Container>
-      {/* <NavBar showBackButton={true} /> */}
       <h1>Login</h1>
 
       <LoginForm className="loginForm" onSubmit={handleSubmit}>
