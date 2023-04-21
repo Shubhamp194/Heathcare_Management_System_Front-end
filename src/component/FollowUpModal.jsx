@@ -88,8 +88,8 @@ const FollowUpModal = ({ addFollowUps, setShowModal }) => {
     // create object of the follow up and add into list of the
     let _followups = generateFollowups(
       startDate,
-      gap,
-      cnt,
+      multiple ? gap : 1,
+      multiple ? cnt : 1,
       instruction,
       selectedVitals
     );

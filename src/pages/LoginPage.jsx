@@ -45,6 +45,13 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    let username = userName;
+
+    if (username.toLowerCase().indexOf("fhw") !== -1) {
+      alert("Invalid username or password");
+      return;
+    }
+
     const obj = JSON.stringify({ loginId: userName, password });
 
     fetch(baseURL + endPoints["LOGIN"], {
