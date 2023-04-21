@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import NavBar from "../component/Navbar";
 import { pastHR as data } from "../utils/utility";
 import PatientCard from "../component/PatientCard";
 import { useNavigate } from "react-router-dom";
 import routes from "../Router/routes";
+import { UserContext } from "../contexts/UserContext";
+import { baseURL, endPoints } from "../constans";
 
 const PastPatientHealthRecords = () => {
   const patients = {};
@@ -15,6 +17,8 @@ const PastPatientHealthRecords = () => {
   const [loading, setLoading] = useState(true);
   const [patientList, setPatientList] = useState({});
   const [healthRecords, setHealthRecords] = useState({});
+
+  const { user } = useContext(UserContext);
 
   const prepare = (_data) => {
     _data.forEach((obj) => {
@@ -35,8 +39,34 @@ const PastPatientHealthRecords = () => {
   };
 
   useEffect(() => {
-    prepare(data);
-    setLoading(false);
+    fetch(
+      baseURL + endPoints["DOCTOR_FETCH_PAST_PATIENTS_HRS"] + user["loginId"],
+      {
+        method: "POST",
+        body: JSON.stringify({
+          startDate: "2023-03-09",
+          endDate: "2023-04-21",
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            localStorage.getItem("token") &&
+            localStorage.getItem("token").toString(),
+        },
+      }
+    )
+      .then((res) => {
+        if (res.status === 200) return res.json();
+        throw res;
+      })
+      .then((_data) => {
+        prepare(_data[0]);
+      })
+      .catch((e) => console.error(e))
+      .finally(() => setLoading(false));
+
+    // prepare(data);
+    // setLoading(false);
   }, []);
 
   return (

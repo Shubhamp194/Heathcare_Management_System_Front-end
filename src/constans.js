@@ -23,6 +23,7 @@ const endPoints = {
   DOCTOR_SUBMIT_HR: "/doctor/submitHealthRecord",
   DOCTOR_GET_CONSENTED_DATA: "/doctor/getConsentData?uhId=",
   DOCTOR_OPD_CASES: "/doctor/getNewHealthRecords?loginId=",
+  DOCTOR_FETCH_PAST_PATIENTS_HRS: "/doctor/getOldHealthRecords?loginId=",
   GET_OTP: "/blackbox/getOtp?loginId=",
   VALIDATE_OTP: "/blackbox/validateOtp",
   RESET_PASSWORD: "/blackbox/resetPassword",
