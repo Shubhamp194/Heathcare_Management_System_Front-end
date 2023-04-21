@@ -331,20 +331,26 @@ const PatientHealthRecordForm = () => {
               className="hrContainer"
             >
               {consent ? (
-                <div
-                  style={{
-                    overflowY: "auto",
-                    maxWidth: "613px",
-                    minHeight: "424px",
-                    maxHeight: "424px",
-                  }}
-                >
-                  {pastHealthRec.map((v, key) => (
-                    <div key={key} style={{ margin: "5px" }}>
-                      <HRCard hr={v} modalHandler={handleHRModal} />
-                    </div>
-                  ))}
-                </div>
+                pastHealthRec.length > 0 ? (
+                  <div
+                    style={{
+                      overflowY: "auto",
+                      maxWidth: "613px",
+                      minHeight: "424px",
+                      maxHeight: "424px",
+                    }}
+                  >
+                    {pastHealthRec.map((v, key) => (
+                      <div key={key} style={{ margin: "5px" }}>
+                        <HRCard hr={v} modalHandler={handleHRModal} />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <h2 style={{ textAlign: "center", marginTop: "25%" }}>
+                    No past health records
+                  </h2>
+                )
               ) : (
                 <>
                   <input

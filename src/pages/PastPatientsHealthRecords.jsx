@@ -18,7 +18,8 @@ const PastPatientHealthRecords = () => {
   const [patientList, setPatientList] = useState({});
   const [healthRecords, setHealthRecords] = useState({});
 
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const prepare = (_data) => {
     _data.forEach((obj) => {

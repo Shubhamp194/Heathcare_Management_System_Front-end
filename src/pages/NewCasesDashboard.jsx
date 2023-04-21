@@ -18,7 +18,9 @@ const NewCasesDashboard = () => {
 
   const navigate = useNavigate();
 
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleAttendPatient = (p) => {
     navigate(routes.HealthRecord, {

@@ -1,5 +1,25 @@
 import React from "react";
 
+const CardFields = ({ label, data }) => {
+  return (
+    <p
+      style={{
+        margin: "0",
+        marginTop: "0px",
+      }}
+    >
+      <span
+        style={{
+          fontWeight: "bold",
+        }}
+      >
+        {label + " : "}
+      </span>{" "}
+      {data}
+    </p>
+  );
+};
+
 const HRCard = ({ hr, modalHandler }) => {
   const { conclusion: symptoms, treatment, creationDate } = hr;
 
@@ -26,36 +46,9 @@ const HRCard = ({ hr, modalHandler }) => {
           flex: 4,
         }}
       >
-        <p
-          style={{
-            margin: "0",
-            marginTop: "0px",
-          }}
-        >
-          <span
-            style={{
-              fontWeight: "bold",
-            }}
-          >
-            Symptoms :
-          </span>{" "}
-          {symptoms}
-        </p>
-        <p
-          style={{
-            margin: "0",
-            marginTop: "10px",
-          }}
-        >
-          <span
-            style={{
-              fontWeight: "bold",
-            }}
-          >
-            Treatment :
-          </span>{" "}
-          {treatment}
-        </p>
+        <CardFields label={"Symptoms"} data={symptoms} />
+        <CardFields label={"Treatment"} data={treatment} />
+
         <p
           style={{
             margin: "0",
@@ -67,7 +60,7 @@ const HRCard = ({ hr, modalHandler }) => {
         </p>
       </div>
 
-      <button
+      {/* <button
         style={{
           flex: 1,
           marginLeft: "10px",
@@ -83,7 +76,7 @@ const HRCard = ({ hr, modalHandler }) => {
         onClick={(e) => modalHandler(hr)}
       >
         show
-      </button>
+      </button> */}
     </div>
   );
 };

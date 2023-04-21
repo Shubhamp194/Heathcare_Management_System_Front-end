@@ -48,7 +48,8 @@ const PatientReassignmentPage = () => {
   const [modalObj, setModalObj] = useState({});
   const [reload, setReload] = useState(false);
 
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const assignPatientToFHW = (id, list, currentFHW, newList) => {
     let tmp = fhws;

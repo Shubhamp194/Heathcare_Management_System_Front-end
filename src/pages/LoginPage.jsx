@@ -73,7 +73,7 @@ const LoginPage = () => {
         role = role.substring(0, 3);
         let doctors = role === "REC" ? data[1] : [];
 
-        localStorage.setItem("user", _user);
+        localStorage.setItem("user", JSON.stringify(_user));
         setUser(_user);
 
         if (role === "REC") {

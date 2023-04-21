@@ -6,10 +6,10 @@ const roles = [
 
 const oneDayInMillis = 86400000;
 // const baseURL = "http://localhost:8081";
-// const baseURL = "http://172.16.133.196:8082";
+const baseURL = "http://172.16.201.120:8081";
 
-const baseURL =
-  "http://55b6-2405-204-5605-9c0e-e410-2fd5-cc1a-3b83.ngrok-free.app";
+// const baseURL =
+// "http://55b6-2405-204-5605-9c0e-e410-2fd5-cc1a-3b83.ngrok-free.app";
 
 const endPoints = {
   LOGIN: "/common/login",
@@ -27,6 +27,7 @@ const endPoints = {
   GET_OTP: "/blackbox/getOtp?loginId=",
   VALIDATE_OTP: "/blackbox/validateOtp",
   RESET_PASSWORD: "/blackbox/resetPassword",
+  AUTHENTICATE: "/common/authenticate", //send auth token in req
 };
 
 export { endPoints, oneDayInMillis, roles, baseURL };
