@@ -5,7 +5,7 @@ import PatientCard from "../component/PatientCard";
 import { useNavigate } from "react-router-dom";
 import routes from "../Router/routes";
 import { UserContext } from "../contexts/UserContext";
-import { baseURL, endPoints } from "../constans";
+import { baseURL, endPoints, oneDayInMillis } from "../constans";
 
 const PastPatientHealthRecords = () => {
   const patients = {};
@@ -39,14 +39,15 @@ const PastPatientHealthRecords = () => {
     navigate(routes.PatientHR, { state: { hrs } });
   };
 
-  useEffect(() => {
+  const fetchData = (_startDate, _endDate) => {
+    debugger;
     fetch(
       baseURL + endPoints["DOCTOR_FETCH_PAST_PATIENTS_HRS"] + user["loginId"],
       {
         method: "POST",
         body: JSON.stringify({
-          startDate: "2023-03-09",
-          endDate: "2023-04-21",
+          startDate: _startDate,
+          endDate: _endDate,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -65,9 +66,15 @@ const PastPatientHealthRecords = () => {
       })
       .catch((e) => console.error(e))
       .finally(() => setLoading(false));
+  };
 
-    // prepare(data);
-    // setLoading(false);
+  useEffect(() => {
+    fetchData(
+      new Date(new Date().valueOf() - oneDayInMillis * 10)
+        .toISOString()
+        .split("T")[0],
+      new Date().toISOString().split("T")[0]
+    );
   }, []);
 
   return (
@@ -79,9 +86,9 @@ const PastPatientHealthRecords = () => {
       <div style={{ textAlign: "center" }}>
         <h3 style={{ marginBottom: 0 }}>Select Time Period</h3>
         <p style={{ marginTop: "0" }}>
-          it will show all the patients registered during this period
+          it will show all the patient's records registered during this period
         </p>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="startDate">Start Date : </label>
           <input
             name="startDate"
@@ -120,7 +127,8 @@ const PastPatientHealthRecords = () => {
               paddingLeft: "10px",
               paddingRight: "10px",
             }}
-            onClick={(e) => console.log("baaaam")}
+            disabled={startDate === "" || endDate === ""}
+            onClick={(e) => fetchData(startDate, endDate)}
           >
             search
           </button>
