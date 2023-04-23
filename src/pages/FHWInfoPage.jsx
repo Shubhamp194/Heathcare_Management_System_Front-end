@@ -13,6 +13,7 @@ function FHWInfoPage() {
     // border: "2px solid black",
     padding: "10px",
     margin: "20px",
+    fontWeight: "bold",
     // backgroundColor: "lightBlue",
   };
 
@@ -197,12 +198,20 @@ function FHWInfoPage() {
         <p>Name :{fullName}</p>
         <p>Patients Assigned : {patients}</p>
         <p>Total follow ups assigned : {total}</p>
-        <p>Total follow up completed : {completed}</p>
-        <p>Follow ups left : {total - completed}</p>
-        <p>Follow ups completed on time : {completedOnTime}</p>
-        <p>Follow ups completed after deadline : {completedLate}</p>
-        <p>Upcoming Follow ups : {upcoming}</p>
-        <p>Follow ups in backlog : {backlog}</p>
+        <p style={{ color: "green" }}>
+          Total follow up completed : {completed}
+        </p>
+        <p style={{ color: "darkorange" }}>
+          Follow ups left : {total - completed}
+        </p>
+        <p style={{ color: "green" }}>
+          Follow ups completed on time : {completedOnTime}
+        </p>
+        <p style={{ color: "red" }}>
+          Follow ups completed after deadline : {completedLate}
+        </p>
+        <p style={{ color: "blue" }}>Upcoming Follow ups : {upcoming}</p>
+        <p style={{ color: "red" }}>Follow ups in backlog : {backlog}</p>
       </div>
 
       <div className="charts">

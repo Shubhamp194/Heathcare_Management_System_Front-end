@@ -13,7 +13,7 @@ function ProfileCard(props) {
     margin: "50px",
   };
 
-  const { data, role } = props;
+  const { data, role, imgUrl } = props;
   const showHospital = role === "Supervisor" ? false : true;
 
   return (
@@ -30,6 +30,19 @@ function ProfileCard(props) {
         <p>Gender : {data.citizen.gender}</p>
         <p>D.O.B : {data.citizen.dob}</p>
         {showHospital && <p>Hospital : {data.hospital.name}</p>}
+      </div>
+      <div
+        style={{
+          border: "2px solid black",
+          height: "200px",
+          width: "200px",
+          position: "absolute",
+          top: "38%",
+          left: "50%",
+        }}
+        className="image"
+      >
+        <img src={imgUrl} style={{ height: "100%" }} alt={role} />
       </div>
     </div>
   );
