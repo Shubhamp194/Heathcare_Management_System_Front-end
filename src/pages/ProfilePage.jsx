@@ -10,8 +10,8 @@ import {
 import { UserContext } from "../contexts/UserContext";
 
 function ProfilePage() {
-  const data = doctorData[0];
-  // const { user: data } = useContext(UserContext);
+  // const data = doctorData[0];
+  const { user: data } = useContext(UserContext);
 
   const id = data.loginId.substring(0, 3);
 

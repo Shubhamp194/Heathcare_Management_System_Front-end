@@ -11,31 +11,31 @@ function FHWAnalyticsPage() {
   const [dataFromApi, setDataFromApi] = useState([]);
   const { user } = useContext(UserContext);
 
-  // useEffect(() => {
-  //   fetch(baseURL + "/supervisor/getFhws?loginId=" + user["loginId"], {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization:
-  //         localStorage.getItem("token") &&
-  //         localStorage.getItem("token").toString(),
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.status === 200) return res.json();
-  //       throw res;
-  //     })
-  //     .then((data) => {
-  //       data = data[0];
-  //       setDataFromApi(data);
-  //     })
-  //     .catch((e) => console.error(e))
-  //     .finally(() => {
-  //       // setLoading(false);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch(baseURL + "/supervisor/stats?loginId=" + user["loginId"], {
+      method: "GET",
+      headers: {
+        Authorization:
+          localStorage.getItem("token") &&
+          localStorage.getItem("token").toString(),
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) return res.json();
+        throw res;
+      })
+      .then((data) => {
+        data = data[0];
+        setDataFromApi(data);
+      })
+      .catch((e) => console.error(e))
+      .finally(() => {
+        // setLoading(false);
+      });
+  }, []);
 
-  const fhwList = data[0];
-  // const fhwList = dataFromApi;
+  // const fhwList = data[0];
+  const fhwList = dataFromApi;
   let navigate = useNavigate();
 
   function handleClick(idx) {
