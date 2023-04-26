@@ -60,6 +60,7 @@ const NavBar = ({ showBackButton = false }) => {
           }}
           onClick={(e) => {
             localStorage.removeItem("token");
+            localStorage.removeItem("user");
             setUser(null);
             navigate(routes.LandingPage, { replace: true });
           }}

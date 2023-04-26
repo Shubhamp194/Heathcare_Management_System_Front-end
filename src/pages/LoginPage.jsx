@@ -3,10 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import { baseURL } from "../constans";
+import { baseURL, endPoints } from "../constans";
 import routes from "../Router/routes";
 import { removeToken } from "../utils/utility";
-import { encryptString, decryptString } from "../utils/encrypt_decrypt";
 
 const LoginForm = styled("form")(({ theme }) => ({
   backgroundColor: "#FAFAFA",
@@ -46,10 +45,16 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // encryptString(
+    let username = userName;
+
+    if (username.toLowerCase().indexOf("fhw") !== -1) {
+      alert("Invalid username or password");
+      return;
+    }
+
     const obj = JSON.stringify({ loginId: userName, password });
 
-    fetch(baseURL + "/common/login", {
+    fetch(baseURL + endPoints["LOGIN"], {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: obj,
@@ -63,13 +68,12 @@ const LoginPage = () => {
         throw res;
       })
       .then((data) => {
-        // data = JSON.parse(decryptString(data));
-        // console.log(data);
         let _user = data[0];
         let { loginId: role } = data[0];
         role = role.substring(0, 3);
         let doctors = role === "REC" ? data[1] : [];
 
+        localStorage.setItem("user", JSON.stringify(_user));
         setUser(_user);
 
         if (role === "REC") {
@@ -100,7 +104,6 @@ const LoginPage = () => {
     <div>{"loading..."}</div>
   ) : (
     <Container>
-      {/* <NavBar showBackButton={true} /> */}
       <h1>Login</h1>
 
       <LoginForm className="loginForm" onSubmit={handleSubmit}>

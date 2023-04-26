@@ -15,6 +15,8 @@ import PatientReassignmentPage from "../pages/PatientReassignPage";
 import FHWAnalyticsPage from "../pages/FHWAnalyticsPage";
 import FHWInfoPage from "../pages/FHWInfoPage";
 import PieChart from "../component/PieChart";
+import PastPatientHealthRecords from "../pages/PastPatientsHealthRecords";
+import PatientHealthRecords from "../pages/PatientHealthRecords";
 
 const AppRouter = () => {
   return (
@@ -22,6 +24,8 @@ const AppRouter = () => {
       <Routes>
         <Route path={routes.LandingPage} element={<LandingPage />} />
         <Route path={routes.LoginPage} element={<LoginPage />} />
+        <Route path={routes.ForgotPassword} element={<ForgotPassword />} />
+
         <Route
           path={routes.ReceptionistDashboard}
           element={<ReceptionistDashboard />}
@@ -33,11 +37,16 @@ const AppRouter = () => {
           element={<PatientHealthRecordForm />}
         />
         <Route
+          path={routes.PastPatientHR}
+          element={<PastPatientHealthRecords />}
+        />
+        <Route path={routes.PatientHR} element={<PatientHealthRecords />} />
+
+        <Route
           path={routes.SupervisorDashboard}
           element={<SupervisorDashboard />}
         />
         <Route path={routes.AssignFWH} element={<FHWAssignmentPage />} />
-        <Route path={routes.ForgotPassword} element={<ForgotPassword />} />
         <Route
           path={routes.ReassignPatient}
           element={<PatientReassignmentPage />}

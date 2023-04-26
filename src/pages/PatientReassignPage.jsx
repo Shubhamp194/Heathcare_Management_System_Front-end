@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavBar from "../component/Navbar";
 import { List, ListItem } from "@mui/material";
-import { baseURL } from "../constans";
+import { baseURL, endPoints } from "../constans";
 import PatientReassignModal from "../component/PatientReassignModal";
 
 const FHWCard = ({ fhw, cnt, handler }) => {
@@ -48,16 +48,16 @@ const PatientReassignmentPage = () => {
   const [modalObj, setModalObj] = useState({});
   const [reload, setReload] = useState(false);
 
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const assignPatientToFHW = (id, list, currentFHW, newList) => {
     let tmp = fhws;
 
     for (let i = 0; i < tmp.length; i++) {
       if (tmp[i]["fieldHealthWorker"]["loginId"] === id) {
-        // console.log(tmp[i]["citizens"]);
         tmp[i]["citizens"] = tmp[i]["citizens"].concat(list);
-        // console.log(tmp[i]["citizens"]);
+
         break;
       }
     }
@@ -105,7 +105,7 @@ const PatientReassignmentPage = () => {
       },
     };
 
-    fetch(baseURL + "/supervisor/reassign", options)
+    fetch(baseURL + endPoints["SUPERVISOR_PATIENT_REASSIGN"], options)
       .then((res) => {
         if (res.status === 200) return res.json();
         throw res;
@@ -129,7 +129,7 @@ const PatientReassignmentPage = () => {
   };
 
   useEffect(() => {
-    fetch(baseURL + "/supervisor/getFhws?loginId=" + user["loginId"], {
+    fetch(baseURL + endPoints["SUPERVISOR_GET_FHW"] + user["loginId"], {
       method: "GET",
       headers: {
         Authorization:

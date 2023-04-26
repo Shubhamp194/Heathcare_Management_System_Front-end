@@ -2,7 +2,7 @@ import { List } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import FHWAssignmentCard from "../component/FWHAssignmentCard";
 import NavBar from "../component/Navbar";
-import { baseURL } from "../constans";
+import { baseURL, endPoints } from "../constans";
 import { UserContext } from "../contexts/UserContext";
 
 const FHWAssignmentPage = () => {
@@ -16,7 +16,7 @@ const FHWAssignmentPage = () => {
       fieldHealthWorker: { loginId: fhwID },
     };
 
-    fetch(baseURL + "/supervisor/submitAssignment", {
+    fetch(baseURL + endPoints["SUPERVISOR_ASSIGN_NEW_FHW"], {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const FHWAssignmentPage = () => {
   useEffect(() => {
     const id = user.loginId;
 
-    fetch(baseURL + "/supervisor/getUnassignedCitizens?loginId=" + id, {
+    fetch(baseURL + endPoints["SUPERVISOR_LIST_OF_UNASSIGNED_PATIENT"] + id, {
       method: "GET",
       headers: {
         Authorization:
