@@ -96,7 +96,7 @@ const PatientHealthRecordForm = () => {
         throw res;
       })
       .then((data) => {
-        alert(data);
+        alert("Record Submitted");
         navigation(routes.OPD, { replace: true });
       })
       .catch((e) => {

@@ -90,7 +90,7 @@ const PaginatedDataContainer = ({ data, handler }) => {
                   }
                   label={"Health Worker's Observation"}
                 />
-                <h3>"Vitals Collected (if any)"</h3>
+                <h3>Vitals Collected (if any)</h3>
                 {vitals.map((v, id) => {
                   return (
                     followup[_.camelCase(v)] && (

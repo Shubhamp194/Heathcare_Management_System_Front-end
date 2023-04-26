@@ -163,7 +163,7 @@ const FollowUpModal = ({ addFollowUps, setShowModal }) => {
                   name="gap"
                   value={gap}
                   required
-                  min={1}
+                  min={0}
                   max={60}
                   onChange={handleGapChange}
                 />

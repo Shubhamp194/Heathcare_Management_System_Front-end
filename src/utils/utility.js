@@ -386,6 +386,3 @@ export const cityWisePincode = {
   Asna: 396415,
   Bilimora: 396321,
 };
-
-export const token =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSRUMxMyIsImlhdCI6MTY3OTU4NzM3NSwiZXhwIjoxNjc5NjczNzc1fQ.r5pV2-Q6TIDiGTwKFKDm-sws6MnTcT5wrv5BJBp08X8";
