@@ -52,7 +52,7 @@ function FHWAnalyticsPage() {
       </h1>
       <div className="fhwList">
         <ol>
-          {fhwList > 0 ? (
+          {fhwList.length > 0 ? (
             fhwList.map((e, index) => (
               <li key={e.fieldHealthWorker.loginId}>
                 <FHWInfoCard
