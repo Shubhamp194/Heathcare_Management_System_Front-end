@@ -5,7 +5,7 @@ import {
   getTodaysDateInYYYYMMDDFormatSeperateByhyphen as today,
   removeToken,
 } from "../utils/utility";
-import { baseURL } from "../constans";
+import { baseURL, endPoints } from "../constans";
 import { useLocation } from "react-router-dom";
 import CustomizedSnackbars from "../component/SnackBar";
 import { STATES, DISTRICTTOTALUKA, STATETODISTRICT } from "../utils/utility";
@@ -94,7 +94,7 @@ const ReceptionistDashboard = () => {
   const handleSubmitMiddleWare = async (e) => {
     e.preventDefault();
 
-    fetch(baseURL + "/receptionist/confirmation?uhId=" + healthID, {
+    fetch(baseURL + endPoints["RECEPTION_PATIENT_CNFRM"] + healthID, {
       method: "GET",
       headers: new Headers({
         Authorization:
@@ -142,7 +142,7 @@ const ReceptionistDashboard = () => {
     obj["doctor"] = { loginId: doctor };
 
     const healthRecord = JSON.stringify(obj);
-    fetch(baseURL + "/receptionist/createHealthRecord", {
+    fetch(baseURL + endPoints["RECEPTION_CREATE_HR"], {
       body: healthRecord,
       headers: {
         "Content-Type": "application/json",

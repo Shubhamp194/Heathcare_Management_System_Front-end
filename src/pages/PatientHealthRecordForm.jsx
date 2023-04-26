@@ -5,7 +5,7 @@ import FollowUpModal from "../component/FollowUpModal";
 import HRCard from "../component/HealthRecordCard";
 import HealthRecordModal from "../component/HealthRecordModal";
 import PatientCard from "../component/PatientCard";
-import { baseURL } from "../constans";
+import { baseURL, endPoints } from "../constans";
 import routes from "../Router/routes";
 import { calculate_age, removeToken } from "../utils/utility";
 
@@ -45,7 +45,7 @@ const PatientHealthRecordForm = () => {
   };
 
   const fetchPastHR = () => {
-    fetch(baseURL + "/doctor/getConsentData?uhId=" + citizenData.uhId, {
+    fetch(baseURL + endPoints["DOCTOR_GET_CONSENTED_DATA"] + citizenData.uhId, {
       method: "GET",
       headers: {
         Authorization:
@@ -76,10 +76,11 @@ const PatientHealthRecordForm = () => {
     patientData["prescription"] = prescription;
     patientData["treatment"] = treatemet;
     patientData["followUps"] = followUps;
+    patientData["citizen"] = { uhId: patientData["citizen"]["uhId"] };
 
     let healthRec = JSON.stringify(patientData);
 
-    fetch(baseURL + "/doctor/submitHealthRecord", {
+    fetch(baseURL + endPoints["DOCTOR_SUBMIT_HR"], {
       body: healthRec,
       method: "POST",
       headers: {
@@ -330,20 +331,26 @@ const PatientHealthRecordForm = () => {
               className="hrContainer"
             >
               {consent ? (
-                <div
-                  style={{
-                    overflowY: "auto",
-                    maxWidth: "613px",
-                    minHeight: "424px",
-                    maxHeight: "424px",
-                  }}
-                >
-                  {pastHealthRec.map((v, key) => (
-                    <div key={key} style={{ margin: "5px" }}>
-                      <HRCard hr={v} modalHandler={handleHRModal} />
-                    </div>
-                  ))}
-                </div>
+                pastHealthRec.length > 0 ? (
+                  <div
+                    style={{
+                      overflowY: "auto",
+                      maxWidth: "613px",
+                      minHeight: "424px",
+                      maxHeight: "424px",
+                    }}
+                  >
+                    {pastHealthRec.map((v, key) => (
+                      <div key={key} style={{ margin: "5px" }}>
+                        <HRCard hr={v} modalHandler={handleHRModal} />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <h2 style={{ textAlign: "center", marginTop: "25%" }}>
+                    No past health records
+                  </h2>
+                )
               ) : (
                 <>
                   <input

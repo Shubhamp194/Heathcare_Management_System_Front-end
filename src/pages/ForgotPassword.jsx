@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import routes from "../Router/routes";
 import { useNavigate } from "react-router-dom";
-import { baseURL } from "../constans";
+import { baseURL, endPoints } from "../constans";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const ForgotPassword = () => {
       return;
     }
 
-    fetch(baseURL + "/blackbox/getOtp?loginId=" + id, {
+    fetch(baseURL + endPoints["GET_OTP"] + id, {
       method: "GET",
     })
       .then((res) => {
@@ -45,7 +45,7 @@ const ForgotPassword = () => {
   const handleValidateOTP = (otp, loginId) => {
     const bodyObj = { loginId, otp };
 
-    fetch(baseURL + "/blackbox/validateOtp", {
+    fetch(baseURL + endPoints["VALIDATE_OTP"], {
       method: "POST",
       body: JSON.stringify(bodyObj),
       headers: { "Content-Type": "application/json" },
@@ -79,7 +79,7 @@ const ForgotPassword = () => {
   const handleSetNewPassword = (loginId, password) => {
     const bodyObj = { loginId, password };
 
-    fetch(baseURL + "/blackbox/resetPassword", {
+    fetch(baseURL + endPoints["RESET_PASSWORD"], {
       method: "POST",
       body: JSON.stringify(bodyObj),
       headers: {

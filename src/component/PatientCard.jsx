@@ -2,7 +2,7 @@ import React from "react";
 import { ListItem, ListItemText, Button } from "@mui/material";
 import { calculate_age } from "../utils/utility";
 
-const PatientCard = ({ handler, name, gender, age }) => {
+const PatientCard = ({ handler, name, gender, age, buttonName = "Attend" }) => {
   return (
     <ListItem
       style={{
@@ -25,7 +25,7 @@ const PatientCard = ({ handler, name, gender, age }) => {
         style={{ color: "black", border: "1px solid black" }}
         onClick={handler}
       >
-        Attend
+        {buttonName}
       </Button>
     </ListItem>
   );

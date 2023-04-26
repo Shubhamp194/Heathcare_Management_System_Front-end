@@ -92,6 +92,26 @@ const NavBar = ({ showBackButton = false }) => {
           >
             Logout
           </div>
+        <div
+          style={{
+            display: "inline",
+            color: "black",
+            fontWeight: "bold",
+            fontSize: "1.25rem",
+            textDecoration: "none",
+            backgroundColor: "gray",
+            padding: "5px",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+          onClick={(e) => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            setUser(null);
+            navigate(routes.LandingPage, { replace: true });
+          }}
+        >
+          Logout
         </div>
       </ul>
     </nav>

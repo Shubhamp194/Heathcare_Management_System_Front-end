@@ -23,7 +23,13 @@ const generateFollowups = (
   instruction,
   selectedVitals
 ) => {
-  let vitals = selectedVitals.toString();
+  let _vitals = new Array(6);
+  _vitals.fill(false, 0, vitals.length);
+
+  selectedVitals.forEach((v) => {
+    _vitals[vitals.indexOf(v)] = true;
+  });
+
   let date = new Date(startDate).valueOf();
   let followups = [];
   gap++;
@@ -31,7 +37,7 @@ const generateFollowups = (
     let obj = {
       dateOfFollowUp: new Date(date).toISOString().substring(0, 10),
       instruction,
-      fields: vitals,
+      vitals: _vitals,
     };
     followups.push(obj);
     date += oneDayInMillis * gap;
@@ -82,8 +88,8 @@ const FollowUpModal = ({ addFollowUps, setShowModal }) => {
     // create object of the follow up and add into list of the
     let _followups = generateFollowups(
       startDate,
-      gap,
-      cnt,
+      multiple ? gap : 1,
+      multiple ? cnt : 1,
       instruction,
       selectedVitals
     );
