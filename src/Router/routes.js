@@ -9,6 +9,8 @@ const routes = Object.freeze({
   AssignFWH: "/assignfhw",
   ForgotPassword: "/forgotPassword",
   ReassignPatient: "/reassignPatient",
+  FHWAnalytics: "/fhw_analytics",
+  FHWInfo: "/fhw_info",
   PastPatientHR: "/pastPatientHR",
   PatientHR: "/patientHRs",
 });
