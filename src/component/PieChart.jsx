@@ -7,7 +7,7 @@ function PieChart(props) {
 
   return (
     <div>
-      <div style={{ width: "380px" }}>
+      <div style={{ height: "100%" }}>
         <Pie data={chartData} />
       </div>
     </div>

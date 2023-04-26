@@ -1,0 +1,120 @@
+export const supervisorData = [
+  {
+    loginId: "SUP69",
+    citizen: {
+      uhId: 69,
+      fname: "Priya",
+      lname: "Gupta",
+      gender: "F",
+      dob: "1995-03-22",
+    },
+    assignedPincode: "570001",
+  },
+];
+
+export const doctorData = [
+  {
+    loginId: "DOC3",
+    citizen: {
+      uhId: 3,
+      fname: "Ravi",
+      lname: "Kumar",
+      gender: "M",
+      dob: "1996-03-17",
+      mobileNo: "6543219870",
+    },
+    hospital: {
+      hospId: 2,
+      name: "Sunny Hospital",
+      street1: "25, Kaggadasapura Main Road",
+      city: "Chickpet",
+      district: "Bangalore",
+      state: "Karnataka",
+      pincode: "560053",
+      contactNo: "9123456789",
+    },
+  },
+];
+
+export const receptionistData = [
+  {
+    loginId: "REC13",
+    citizen: {
+      uhId: 13,
+      fname: "Radha",
+      lname: "Rai",
+      gender: "F",
+      dob: "1993-03-16",
+      street1: "701, Hill View",
+      city: "Electronics City",
+      state: "Karnataka",
+      pincode: "560100",
+      district: "Bangalore",
+      mobileNo: "7976543210",
+    },
+    hospital: {
+      hospId: 2,
+      name: "Sunny Hospital",
+      street1: "25, Kaggadasapura Main Road",
+      city: "Chickpet",
+      district: "Bangalore",
+      state: "Karnataka",
+      pincode: "560053",
+      contactNo: "9123456789",
+    },
+  },
+  [
+    {
+      loginId: "DOC3",
+      citizen: {
+        uhId: 3,
+        fname: "Ravi",
+        lname: "Kumar",
+        gender: "M",
+        dob: "1996-03-17",
+        street1: "507, Rose Garden",
+        city: "Bannerghatta",
+        state: "Karnataka",
+        pincode: "560083",
+        district: "Bangalore",
+        mobileNo: "6543219870",
+      },
+      hospital: {
+        hospId: 2,
+        name: "Sunny Hospital",
+        street1: "25, Kaggadasapura Main Road",
+        city: "Chickpet",
+        district: "Bangalore",
+        state: "Karnataka",
+        pincode: "560053",
+        contactNo: "9123456789",
+      },
+    },
+    {
+      loginId: "DOC4",
+      citizen: {
+        uhId: 4,
+        fname: "Suma",
+        lname: "Rao",
+        gender: "F",
+        dob: "1995-04-19",
+        street1: "609, Tulip Inn",
+        city: "Chickpet",
+        state: "Karnataka",
+        pincode: "560053",
+        district: "Bangalore",
+        mobileNo: "9870654321",
+      },
+      hospital: {
+        hospId: 2,
+        name: "Sunny Hospital",
+        street1: "25, Kaggadasapura Main Road",
+        city: "Chickpet",
+        district: "Bangalore",
+        state: "Karnataka",
+        pincode: "560053",
+        contactNo: "9123456789",
+      },
+    },
+  ],
+];

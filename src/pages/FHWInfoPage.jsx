@@ -6,33 +6,44 @@ import NavBar from "../component/Navbar";
 function FHWInfoPage() {
   const myStyle = {
     position: "absolute",
-    top: "15%",
-    left: "5%",
+    top: "18%",
+    left: "2%",
     height: "500px",
     width: "300px",
     // border: "2px solid black",
     padding: "10px",
     margin: "20px",
+    fontWeight: "bold",
     // backgroundColor: "lightBlue",
   };
 
   const chartStyle1 = {
     // border: "3px solid black",
     position: "absolute",
-    top: "25%",
-    left: "32%",
-    height: "400px",
-    width: "400px",
+    top: "30%",
+    left: "28%",
+    height: "300px",
+    width: "300px",
     justifyContent: "center",
   };
 
   const chartStyle2 = {
     // border: "3px solid black",
     position: "absolute",
-    top: "25%",
-    left: "65%",
-    height: "400px",
-    width: "400px",
+    top: "30%",
+    left: "53%",
+    height: "300px",
+    width: "300px",
+    justifyContent: "center",
+  };
+
+  const chartStyle3 = {
+    // border: "3px solid black",
+    position: "absolute",
+    top: "30%",
+    left: "77%",
+    height: "300px",
+    width: "300px",
     justifyContent: "center",
   };
 
@@ -109,45 +120,64 @@ function FHWInfoPage() {
   const chartData1 = {
     datasets: [
       {
-        data: [completed, upcoming, backlog],
-        // backgroundColor: ["#4BB543", "blue", "red"],
+        data: [completedOnTime, completedLate],
+        backgroundColor: ["#2ECC40", "#FF4136"],
       },
     ],
 
-    labels: [
-      "Total Follow ups Completed",
-      "Upcoming follows ups",
-      "Follow ups in Backlog",
-    ],
+    labels: ["On Time", "Late"],
   };
 
   const chartData2 = {
     datasets: [
       {
-        data: [completedOnTime, completedLate, upcoming, backlog],
-        // backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B"],
-        backgroundColor: ["#4BB543", "orange", "blue", "#FF0000"],
+        data: [upcoming, backlog],
+        backgroundColor: ["#0074D9", "#FF851B"],
       },
     ],
 
-    labels: [
-      "Follow ups Completed on time",
-      "Follow ups Completed Late",
-      "Upcoming Follow ups",
-      "Follow ups in Backlog",
+    labels: ["Upcoming", "Backlog"],
+  };
+
+  const chartData3 = {
+    datasets: [
+      {
+        data: [completed, total - completed],
+        backgroundColor: ["#2ECC40", "#FF4136"],
+      },
     ],
+
+    labels: ["Completed", "Not  Completed"],
   };
 
   const emptyChartData = {
     datasets: [
       {
         data: [1],
-        // backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B"],
-        // backgroundColor: ["#4BB543", "orange", "blue", "#FF0000"],
       },
     ],
 
     labels: ["FHW has zero assigned followps"],
+  };
+
+  const emptyRemChartData = {
+    datasets: [
+      {
+        data: [1],
+      },
+    ],
+
+    labels: ["FHW has zero remaining followps"],
+  };
+
+  const emptyComChartData = {
+    datasets: [
+      {
+        data: [1],
+      },
+    ],
+
+    labels: ["FHW has zero completed followps"],
   };
 
   return (
@@ -168,23 +198,51 @@ function FHWInfoPage() {
         <p>Name :{fullName}</p>
         <p>Patients Assigned : {patients}</p>
         <p>Total follow ups assigned : {total}</p>
-        <p>Total follow up completed : {completed}</p>
-        <p>Follow ups left : {total - completed}</p>
-        <p>Follow ups completed on time : {completedOnTime}</p>
-        <p>Follow ups completed after deadline : {completedLate}</p>
-        <p>Upcoming Follow ups : {upcoming}</p>
-        <p>Follow ups in backlog : {backlog}</p>
+        <p style={{ color: "green" }}>
+          Total follow up completed : {completed}
+        </p>
+        <p style={{ color: "darkorange" }}>
+          Follow ups left : {total - completed}
+        </p>
+        <p style={{ color: "green" }}>
+          Follow ups completed on time : {completedOnTime}
+        </p>
+        <p style={{ color: "red" }}>
+          Follow ups completed after deadline : {completedLate}
+        </p>
+        <p style={{ color: "blue" }}>Upcoming Follow ups : {upcoming}</p>
+        <p style={{ color: "red" }}>Follow ups in backlog : {backlog}</p>
       </div>
 
       <div className="charts">
         <div className="chart" style={chartStyle1}>
-          <PieChart chartData={total > 0 ? chartData1 : emptyChartData} />
-          <pre> Stats based on total follow ups</pre>
+          <PieChart
+            chartData={
+              total > 0
+                ? completed === 0
+                  ? emptyComChartData
+                  : chartData1
+                : emptyChartData
+            }
+          />
+          <p style={{ textAlign: "center" }}> Completed Follow ups</p>
         </div>
 
         <div className="chart" style={chartStyle2}>
-          <PieChart chartData={total > 0 ? chartData2 : emptyChartData} />
-          <pre>Stats based on time</pre>
+          <PieChart
+            chartData={
+              total > 0
+                ? upcoming + backlog === 0
+                  ? emptyRemChartData
+                  : chartData2
+                : emptyChartData
+            }
+          />
+          <p style={{ textAlign: "center" }}> Remaining Follow ups</p>
+        </div>
+        <div className="chart" style={chartStyle3}>
+          <PieChart chartData={total > 0 ? chartData3 : emptyChartData} />
+          <p style={{ textAlign: "center" }}> Total Follow ups</p>
         </div>
       </div>
     </div>
