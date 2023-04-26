@@ -52,15 +52,19 @@ function FHWAnalyticsPage() {
       </h1>
       <div className="fhwList">
         <ol>
-          {fhwList.map((e, index) => (
-            <li key={e.fieldHealthWorker.loginId}>
-              <FHWInfoCard
-                name={e.fieldHealthWorker.citizen.fname}
-                assignedPatients={e.fieldHealthWorker.citizenAssigned}
-                handleClick={() => handleClick(index)}
-              />
-            </li>
-          ))}
+          {fhwList > 0 ? (
+            fhwList.map((e, index) => (
+              <li key={e.fieldHealthWorker.loginId}>
+                <FHWInfoCard
+                  name={e.fieldHealthWorker.citizen.fname}
+                  assignedPatients={e.fieldHealthWorker.citizenAssigned}
+                  handleClick={() => handleClick(index)}
+                />
+              </li>
+            ))
+          ) : (
+            <h2>There are no fhw Assigned to you</h2>
+          )}
         </ol>
       </div>
     </div>
