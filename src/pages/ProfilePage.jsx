@@ -11,7 +11,8 @@ import { UserContext } from "../contexts/UserContext";
 
 function ProfilePage() {
   // const data = doctorData[0];
-  const { user: data } = useContext(UserContext);
+  // const { user: data } = useContext(UserContext);
+  const data = JSON.parse(localStorage.getItem("user"));
 
   const id = data.loginId.substring(0, 3);
 

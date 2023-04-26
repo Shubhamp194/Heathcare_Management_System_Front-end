@@ -48,7 +48,7 @@ const NavBar = ({ showBackButton = false }) => {
             back
           </div>
         )}
-        <div>
+        <div style={{ width: "200px" }}>
           <div
             style={{
               display: "inline",
@@ -60,18 +60,18 @@ const NavBar = ({ showBackButton = false }) => {
               padding: "5px",
               borderRadius: "5px",
               cursor: "pointer",
-              // marginRight: "2%",
+              marginRight: "3%",
             }}
             onClick={(e) => {
               // if (navigate.length > 1) navigate(-1);
-              navigate(routes.ProfilePage, { replace: true });
+              navigate(routes.ProfilePage, {});
               // console.log("Profile button clicked");
             }}
           >
             My Profile
           </div>
 
-          <div
+          {/* <div
             style={{
               display: "inline",
               color: "black",
@@ -91,27 +91,28 @@ const NavBar = ({ showBackButton = false }) => {
             }}
           >
             Logout
+          </div> */}
+          <div
+            style={{
+              display: "inline",
+              color: "black",
+              fontWeight: "bold",
+              fontSize: "1.25rem",
+              textDecoration: "none",
+              backgroundColor: "gray",
+              padding: "5px",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+            onClick={(e) => {
+              localStorage.removeItem("token");
+              localStorage.removeItem("user");
+              setUser(null);
+              navigate(routes.LandingPage, { replace: true });
+            }}
+          >
+            Logout
           </div>
-        <div
-          style={{
-            display: "inline",
-            color: "black",
-            fontWeight: "bold",
-            fontSize: "1.25rem",
-            textDecoration: "none",
-            backgroundColor: "gray",
-            padding: "5px",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-          onClick={(e) => {
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
-            setUser(null);
-            navigate(routes.LandingPage, { replace: true });
-          }}
-        >
-          Logout
         </div>
       </ul>
     </nav>

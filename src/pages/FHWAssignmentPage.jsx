@@ -41,8 +41,8 @@ const FHWAssignmentPage = () => {
       });
   };
 
-  const { user } = useContext(UserContext);
-
+  // const { user } = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     const id = user.loginId;
 

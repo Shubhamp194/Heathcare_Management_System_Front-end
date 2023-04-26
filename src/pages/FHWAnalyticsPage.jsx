@@ -9,7 +9,7 @@ import NavBar from "../component/Navbar";
 
 function FHWAnalyticsPage() {
   const [dataFromApi, setDataFromApi] = useState([]);
-  const { user } = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     fetch(baseURL + "/supervisor/stats?loginId=" + user["loginId"], {
@@ -47,7 +47,9 @@ function FHWAnalyticsPage() {
   return (
     <div>
       <NavBar showBackButton={true} />
-      <h1 style={{ textAlign: "center" }}>List of Feild workers assigned</h1>
+      <h1 style={{ textAlign: "center" }}>
+        List of Field workers under supervision
+      </h1>
       <div className="fhwList">
         <ol>
           {fhwList.map((e, index) => (

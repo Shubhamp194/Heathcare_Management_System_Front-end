@@ -20,7 +20,17 @@ function FHWInfoCard(fhw) {
       <div style={mystyle}>
         <pre>
           Name : {name}, Patients assigned : {assignedPatients}{" "}
-          <button onClick={handleClick}>More info</button>
+          <button
+            onClick={handleClick}
+            style={{
+              float: "right",
+              padding: "5px",
+              borderRadius: "4px",
+              border: "1px solid",
+            }}
+          >
+            More info
+          </button>
         </pre>
       </div>
     </div>
