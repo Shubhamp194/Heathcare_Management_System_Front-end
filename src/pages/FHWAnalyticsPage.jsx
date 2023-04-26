@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import FHWInfoCard from "../component/FHWInfoCard";
-import { data } from "../utils/analytics_data";
 import { useNavigate } from "react-router-dom";
 import routes from "../Router/routes";
 import { baseURL } from "../constans";
-import { UserContext } from "../contexts/UserContext";
 import NavBar from "../component/Navbar";
 
 function FHWAnalyticsPage() {

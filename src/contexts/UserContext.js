@@ -7,6 +7,7 @@ const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user")));
+    console.log("called");
   }, []);
 
   return (

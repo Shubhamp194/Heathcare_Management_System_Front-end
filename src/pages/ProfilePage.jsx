@@ -1,11 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import ProfileCard from "../component/ProfileCard";
 import NavBar from "../component/Navbar";
-import {
-  doctorData,
-  receptionistData,
-  supervisorData,
-} from "../utils/profile_data";
 
 import { UserContext } from "../contexts/UserContext";
 

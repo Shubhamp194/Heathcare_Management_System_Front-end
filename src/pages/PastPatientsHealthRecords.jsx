@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import NavBar from "../component/Navbar";
-import { pastHR as data } from "../utils/utility";
 import PatientCard from "../component/PatientCard";
 import { useNavigate } from "react-router-dom";
 import routes from "../Router/routes";

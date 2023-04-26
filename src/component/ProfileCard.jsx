@@ -1,5 +1,4 @@
 import React from "react";
-import { doctorData, supervisorData } from "../utils/profile_data";
 
 function ProfileCard(props) {
   const cardStyle = {
