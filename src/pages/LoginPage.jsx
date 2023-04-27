@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import { baseURL, endPoints } from "../constans";
+import { alertMsg, baseURL, endPoints } from "../constans";
 import routes from "../Router/routes";
 import { removeToken } from "../utils/utility";
 
@@ -48,7 +48,7 @@ const LoginPage = () => {
     let username = userName;
 
     if (username.toLowerCase().indexOf("fhw") !== -1) {
-      alert("Invalid username or password");
+      alert(alertMsg["INVALID_ID_PWD"]);
       return;
     }
 
@@ -88,6 +88,8 @@ const LoginPage = () => {
         }
       })
       .catch((e) => {
+        if (e["status"] === 401) alert(alertMsg["INVALID_ID_PWD"]);
+        else alert(alertMsg["SOMETHING_WENT_WRONG"]);
         console.error(e);
       });
   };

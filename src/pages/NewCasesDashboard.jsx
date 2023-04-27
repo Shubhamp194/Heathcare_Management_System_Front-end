@@ -3,7 +3,7 @@ import NavBar from "../component/Navbar";
 import { List } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import routes from "../Router/routes";
-import { baseURL, endPoints } from "../constans";
+import { alertMsg, baseURL, endPoints } from "../constans";
 import PatientCard from "../component/PatientCard";
 import { UserContext } from "../contexts/UserContext";
 import { removeToken } from "../utils/utility";
@@ -47,7 +47,10 @@ const NewCasesDashboard = () => {
       .then((data) => {
         setPatients(data[0].length > 0 ? data[0] : []);
       })
-      .catch((e) => console.error(e))
+      .catch((e) => {
+        alert("Error fetching data " + alertMsg["SOMETHING_WENT_WRONG"]);
+        console.error(e);
+      })
       .finally(() => {
         setLoading(false);
       });

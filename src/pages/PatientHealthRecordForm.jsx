@@ -5,7 +5,7 @@ import FollowUpModal from "../component/FollowUpModal";
 import HRCard from "../component/HealthRecordCard";
 import HealthRecordModal from "../component/HealthRecordModal";
 import PatientCard from "../component/PatientCard";
-import { baseURL, endPoints } from "../constans";
+import { alertMsg, baseURL, endPoints } from "../constans";
 import routes from "../Router/routes";
 import { calculate_age, removeToken } from "../utils/utility";
 
@@ -60,7 +60,10 @@ const PatientHealthRecordForm = () => {
       .then((data) => {
         if (data[0].length > 0) setPastHealthRec(data[0]);
       })
-      .catch((e) => console.error(e));
+      .catch((e) => {
+        console.error("Something went wrong");
+        console.error(e);
+      });
   };
 
   const handleHRModal = (hr) => {
@@ -96,10 +99,11 @@ const PatientHealthRecordForm = () => {
         throw res;
       })
       .then((data) => {
-        alert("Record Submitted");
+        alert("record submitted, " + alertMsg["SUCCESS"]);
         navigation(routes.OPD, { replace: true });
       })
       .catch((e) => {
+        alert("Not able to reassing, " + alertMsg["SOMETHING_WENT_WRONG"]);
         console.error(e);
       });
   };

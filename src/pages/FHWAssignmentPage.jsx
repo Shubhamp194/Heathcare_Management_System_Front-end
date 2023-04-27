@@ -2,7 +2,7 @@ import { List } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import FHWAssignmentCard from "../component/FWHAssignmentCard";
 import NavBar from "../component/Navbar";
-import { baseURL, endPoints } from "../constans";
+import { alertMsg, baseURL, endPoints } from "../constans";
 import { UserContext } from "../contexts/UserContext";
 
 const FHWAssignmentPage = () => {
@@ -37,6 +37,7 @@ const FHWAssignmentPage = () => {
         setPatients(tmpPatients);
       })
       .catch((e) => {
+        alert("Error in assigning health worker");
         console.error(e);
       });
   };
@@ -62,6 +63,7 @@ const FHWAssignmentPage = () => {
         setPatients(data[0]);
       })
       .catch((e) => {
+        alert(alertMsg["SOMETHING_WENT_WRONG"]);
         console.error(e);
       })
       .finally(() => {

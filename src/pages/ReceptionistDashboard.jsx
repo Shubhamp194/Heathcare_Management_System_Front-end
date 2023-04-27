@@ -5,7 +5,7 @@ import {
   getTodaysDateInYYYYMMDDFormatSeperateByhyphen as today,
   removeToken,
 } from "../utils/utility";
-import { baseURL, endPoints } from "../constans";
+import { alertMsg, baseURL, endPoints } from "../constans";
 import { useLocation } from "react-router-dom";
 import CustomizedSnackbars from "../component/SnackBar";
 import { STATES, DISTRICTTOTALUKA, STATETODISTRICT } from "../utils/utility";
@@ -123,6 +123,8 @@ const ReceptionistDashboard = () => {
         setShowDialog(true);
       })
       .catch((e) => {
+        if (e["status"] === 404) alert(alertMsg["STATUS_404"]);
+        else alert(alertMsg["SOMETHING_WENT_WRONG"]);
         console.error(e);
       });
   };

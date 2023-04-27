@@ -4,7 +4,7 @@ import PatientCard from "../component/PatientCard";
 import { useNavigate } from "react-router-dom";
 import routes from "../Router/routes";
 import { UserContext } from "../contexts/UserContext";
-import { baseURL, endPoints, oneDayInMillis } from "../constans";
+import { alertMsg, baseURL, endPoints, oneDayInMillis } from "../constans";
 
 const PastPatientHealthRecords = () => {
   const patients = {};
@@ -63,7 +63,10 @@ const PastPatientHealthRecords = () => {
       .then((_data) => {
         prepare(_data[0]);
       })
-      .catch((e) => console.error(e))
+      .catch((e) => {
+        alert(alertMsg["SOMETHING_WENT_WRONG"]);
+        console.error(e);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -86,6 +89,7 @@ const PastPatientHealthRecords = () => {
         <h3 style={{ marginBottom: 0 }}>Select Time Period</h3>
         <p style={{ marginTop: "0" }}>
           it will show all the patient's records registered during this period
+          (default last 10 days)
         </p>
         <form onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="startDate">Start Date : </label>
@@ -142,12 +146,13 @@ const PastPatientHealthRecords = () => {
           className="patientListContainer"
           style={{
             display: "flex",
-            justifyContent: "center",
+            alignContent: "center",
             flexWrap: "wrap",
             marginTop: "1%",
             height: "65vh",
             overflowY: "auto",
             scrollbarWidth: "none",
+            flexDirection: "column",
           }}
         >
           {Object.keys(patientList).length === 0 ? (

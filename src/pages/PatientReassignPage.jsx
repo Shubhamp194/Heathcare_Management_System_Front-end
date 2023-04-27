@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
 import NavBar from "../component/Navbar";
 import { List, ListItem } from "@mui/material";
-import { baseURL, endPoints } from "../constans";
+import { alertMsg, baseURL, endPoints } from "../constans";
 import PatientReassignModal from "../component/PatientReassignModal";
 
 const FHWCard = ({ fhw, cnt, handler }) => {
@@ -119,7 +119,10 @@ const PatientReassignmentPage = () => {
         );
         setReload(!reload);
       })
-      .catch((e) => console.error(e))
+      .catch((e) => {
+        alert("Not able to reassign, try again");
+        console.error(e);
+      })
       .finally(() => {});
   };
 
@@ -145,7 +148,10 @@ const PatientReassignmentPage = () => {
         data = data[0];
         setFhws(data);
       })
-      .catch((e) => console.error(e))
+      .catch((e) => {
+        alert(alertMsg["SOMETHING_WENT_WRONG"]);
+        console.error(e);
+      })
       .finally(() => {
         setLoading(false);
       });

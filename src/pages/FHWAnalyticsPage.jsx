@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import FHWInfoCard from "../component/FHWInfoCard";
 import { useNavigate } from "react-router-dom";
 import routes from "../Router/routes";
-import { baseURL } from "../constans";
+import { alertMsg, baseURL } from "../constans";
 import NavBar from "../component/Navbar";
 
 function FHWAnalyticsPage() {
@@ -26,7 +26,10 @@ function FHWAnalyticsPage() {
         data = data[0];
         setDataFromApi(data);
       })
-      .catch((e) => console.error(e))
+      .catch((e) => {
+        alert(alertMsg["SOMETHING_WENT_WRONG"]);
+        console.error(e);
+      })
       .finally(() => {
         // setLoading(false);
       });

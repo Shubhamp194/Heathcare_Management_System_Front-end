@@ -27,4 +27,11 @@ const endPoints = {
   AUTHENTICATE: "/common/authenticate", //send auth token in req
 };
 
+export const alertMsg = {
+  SOMETHING_WENT_WRONG: "something went wrong,try again",
+  STATUS_404: "No data available",
+  SUCCESS: "success",
+  INVALID_ID_PWD: "Invalid username or password",
+};
+
 export { endPoints, oneDayInMillis, roles, baseURL };
