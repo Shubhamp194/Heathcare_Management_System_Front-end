@@ -5,7 +5,7 @@ import routes from "../Router/routes";
 
 const NavBar = ({ showBackButton = false }) => {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
+  const { setUser, setGlobalLoader } = useContext(UserContext);
 
   let buttonStyle = {
     margin: "0px",
@@ -108,6 +108,7 @@ const NavBar = ({ showBackButton = false }) => {
               localStorage.removeItem("token");
               localStorage.removeItem("user");
               setUser(null);
+              setGlobalLoader(true);
               navigate(routes.LandingPage, { replace: true });
             }}
           >

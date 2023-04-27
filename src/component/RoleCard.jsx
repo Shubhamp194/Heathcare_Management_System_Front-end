@@ -1,5 +1,5 @@
 import React from "react";
-import { roles } from "../constans";
+import { baseURL, roles } from "../constans";
 import styled from "@emotion/styled";
 import routes from "../Router/routes";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,49 @@ const RoleCard = ({ role }) => {
   // const history = useHistory();
 
   const handleClick = () => {
+    /*debugger;
+    let data = localStorage.getItem("user");
+    let user = data && JSON.parse(data);
+    let loginId = user && user["loginId"].substr(0, 3);
+    let flag = loginId === "REC" || loginId === "SUP" || loginId === "DOC";
+    let doctors = JSON.parse(localStorage.getItem("doctors"));
+    if (!data || !flag) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      navigate(routes.LoginPage);
+    }
+
+    if (localStorage.getItem("token")) {
+      fetch(baseURL + "/common/authenticate", {
+        method: "GET",
+        headers: { authorization: localStorage.getItem("token") },
+      })
+        .then((res) => {
+          debugger;
+          if (res.status === 200) {
+            if (loginId === "REC") {
+              navigate(routes.ReceptionistDashboard, {
+                state: { doctors },
+                replace: true,
+              });
+            } else if (loginId === "DOC") {
+              navigate(routes.DoctorDashboard, { replace: true });
+            } else if (loginId === "SUP") {
+              navigate(routes.SupervisorDashboard, { replace: true });
+            } else navigate(routes.LoginPage);
+            return;
+          }
+          throw res;
+        })
+        .catch((e) => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          navigate(routes.LoginPage);
+        });
+    }
+*/
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate(routes.LoginPage);
 
     // without authenticaction as of now

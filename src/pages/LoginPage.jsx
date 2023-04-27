@@ -29,7 +29,7 @@ const Container = styled("div")(({ theme }) => ({
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const { setUser } = useContext(UserContext);
+  const { setUser, setGlobalLoader } = useContext(UserContext);
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -72,10 +72,10 @@ const LoginPage = () => {
         let { loginId: role } = data[0];
         role = role.substring(0, 3);
         let doctors = role === "REC" ? data[1] : [];
-
+        // localStorage.setItem("doctors", JSON.stringify(doctors));
+        setGlobalLoader(false);
         localStorage.setItem("user", JSON.stringify(_user));
         setUser(_user);
-
         if (role === "REC") {
           navigate(routes.ReceptionistDashboard, {
             state: { doctors },

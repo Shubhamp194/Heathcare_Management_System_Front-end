@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import NavBar from "../component/Navbar";
 import {
   cityWisePincode,
@@ -11,6 +11,7 @@ import CustomizedSnackbars from "../component/SnackBar";
 import { STATES, DISTRICTTOTALUKA, STATETODISTRICT } from "../utils/utility";
 import PatientDetailDialog from "../component/PatietnDetailModal";
 import { encryptString, decryptString } from "../utils/encrypt_decrypt";
+import { UserContext } from "../contexts/UserContext";
 
 const successSnack = {
   state: true,
@@ -32,6 +33,8 @@ const failureSnack = {
 
 const ReceptionistDashboard = () => {
   const { state: _state } = useLocation();
+
+  const { globalLoader } = useContext(UserContext);
 
   // const [patientName, setPatientName] = useState("");
   const [doctors] = useState(_state["doctors"]);

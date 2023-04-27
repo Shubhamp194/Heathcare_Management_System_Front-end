@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import routes from "./routes";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -18,8 +18,11 @@ import PieChart from "../component/PieChart";
 import ProfilePage from "../pages/ProfilePage";
 import PastPatientHealthRecords from "../pages/PastPatientsHealthRecords";
 import PatientHealthRecords from "../pages/PatientHealthRecords";
+import { UserContext } from "../contexts/UserContext";
 
 const AppRouter = () => {
+  const { globalLoader } = useContext(UserContext);
+
   return (
     <Router>
       <Routes>

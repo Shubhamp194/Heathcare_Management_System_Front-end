@@ -4,6 +4,7 @@ const UserContext = createContext({});
 
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [globalLoader, setGlobalLoader] = useState(true);
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user")));
@@ -11,7 +12,9 @@ const UserContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider
+      value={{ user, setUser, globalLoader, setGlobalLoader }}
+    >
       {children}
     </UserContext.Provider>
   );
